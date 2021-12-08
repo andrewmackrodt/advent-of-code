@@ -15,4 +15,8 @@ describe('solve', () => {
     it('returns count without window', () => {
         expect(solve(input)).toEqual(7)
     })
+
+    it('returns count with window', () => {
+        expect(solve(input, 3)).toEqual(5)
+    })
 })
