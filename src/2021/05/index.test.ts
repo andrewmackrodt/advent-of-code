@@ -12,7 +12,11 @@ describe('Day 05', () => {
 0,0 -> 8,8
 5,5 -> 8,2`
 
-    it('returns number of points lines overlap', () => {
+    it('returns number of points horizontal and vertical lines overlap', () => {
         expect(solve(input)).toEqual(5)
+    })
+
+    it('returns number of points all lines overlap', () => {
+        expect(solve(input, { diagonal: true })).toEqual(12)
     })
 })
