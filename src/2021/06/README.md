@@ -71,3 +71,13 @@ In this example, after 18 days, there are a total of <code>26</code> fish. After
 would be a total of <code><b>5934</b></code>.
 
 Find a way to simulate lanternfish. <b>How many lanternfish would there be after 80 days?</b>
+
+### --- Part Two ---
+
+Suppose the lanternfish live forever and have unlimited food and space. Would they take over the
+entire ocean?
+
+After 256 days in the example above, there would be a total of <code><b>26984457539</b></code>
+lanternfish!
+
+<b>How many lanternfish would there be after 256 days?</b>
