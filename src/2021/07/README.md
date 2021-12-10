@@ -46,3 +46,33 @@ expensive outcomes include aligning at position <code>1</code> (<code>41</code> 
 
 Determine the horizontal position that the crabs can align to using the least fuel possible. <b>How
 much fuel must they spend to align to that position?</b>
+
+### --- Part Two ---
+
+The crabs don't seem interested in your proposed solution. Perhaps you misunderstand crab
+engineering?
+
+As it turns out, crab submarine engines don't burn fuel at a constant rate. Instead, each change of
+1 step in horizontal position costs 1 more unit of fuel than the last: the first step costs
+<code>1</code>, the second step costs <code>2</code>, the third step costs <code>3</code>, and so
+on.
+
+As each crab moves, moving further becomes more expensive. This changes the best horizontal position
+to align them all on; in the example above, this becomes <code>5</code>:
+
+- Move from <code>16</code> to <code>5</code>: <code>66</code> fuel
+- Move from <code>1</code> to <code>5</code>: <code>10</code> fuel
+- Move from <code>2</code> to <code>5</code>: <code>6</code> fuel
+- Move from <code>0</code> to <code>5</code>: <code>15</code> fuel
+- Move from <code>4</code> to <code>5</code>: <code>1</code> fuel
+- Move from <code>2</code> to <code>5</code>: <code>6</code> fuel
+- Move from <code>7</code> to <code>5</code>: <code>3</code> fuel
+- Move from <code>1</code> to <code>5</code>: <code>10</code> fuel
+- Move from <code>2</code> to <code>5</code>: <code>6</code> fuel
+- Move from <code>14</code> to <code>5</code>: <code>45</code> fuel
+
+This costs a total of <code><b>168</b></code> fuel. This is the new cheapest possible outcome; the
+old alignment position (<code>2</code>) now costs <code>206</code> fuel instead.
+
+Determine the horizontal position that the crabs can align to using the least fuel possible so they
+can make you an escape route! <b>How much fuel must they spend to align to that position?</b>
