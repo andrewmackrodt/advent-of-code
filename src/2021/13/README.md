@@ -145,3 +145,10 @@ overlapping after the fold is completed count as a single dot.
 
 <b>How many dots are visible after completing just the first fold instruction on your transparent
 paper?</b>
+
+### --- Part Two ---
+
+Finish folding the transparent paper according to the instructions. The manual says the code is
+always <b>eight capital letters</b>.
+
+<b>What code do you use to activate the infrared thermal imaging camera system?</b>

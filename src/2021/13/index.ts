@@ -1,3 +1,5 @@
+import { asciiToText } from '../../utils/ascii.js'
+
 interface Point {
     x: number
     y: number
@@ -8,7 +10,7 @@ interface Fold {
     value: number
 }
 
-function parse(input: string): { points: Point[]; folds: Fold[] } {
+function parseInput(input: string): { points: Point[]; folds: Fold[] } {
     const points: Point[] = []
     const folds: Fold[] = []
 
@@ -31,22 +33,24 @@ function parse(input: string): { points: Point[]; folds: Fold[] } {
     return { points, folds }
 }
 
-export function solve(input: string, foldLimit = 0): number {
-    const { points, folds } = parse(input)
+function createState(points: Point[], folds: Fold[]): number[][] {
     const state: number[][] = []
     for (
-        let width = 1 + points.reduce((res, p) => Math.max(res, p.x), 0),
-            height = 1 + points.reduce((res, p) => Math.max(res, p.y), 0),
+        let w = 1 + 2 * folds.filter(f => f.axis === 'x').reduce((max, f) => Math.max(max, f.value), 0),
+            h = 1 + 2 * folds.filter(f => f.axis === 'y').reduce((max, f) => Math.max(max, f.value), 0),
             y = 0;
-        y < height;
+        y < h;
         y++
     ) {
-        state.push(new Array(width).fill(0))
+        state.push(new Array(w).fill(0))
     }
     for (const point of points) {
         state[point.y][point.x] = 1
     }
-    let foldCount = 0
+    return state
+}
+
+function fold(state: number[][], folds: Fold[]): void {
     for (const fold of folds) {
         switch (fold.axis) {
             case 'x':
@@ -70,12 +74,26 @@ export function solve(input: string, foldLimit = 0): number {
                 }
                 break
         }
-        if (++foldCount >= foldLimit && foldLimit !== 0) {
-            break
-        }
     }
+}
 
-    return state.reduce((total, row) => (
+function parseState(input: string, foldLimit?: number | undefined): number[][] {
+    const { points, folds } = parseInput(input)
+    const state = createState(points, folds)
+    fold(state, folds.slice(0, foldLimit))
+    return state
+}
+
+export function getVisibleDotCount(input: string, foldLimit?: number | undefined): number {
+    return parseState(input, foldLimit).reduce((total, row) => (
         total + row.reduce((rowTotal, cell) => rowTotal + Math.min(cell, 1), 0)
     ), 0)
 }
+
+export function getCode(input: string): string {
+    const ascii = parseState(input).map(y => y.map(v => v ? '#' : ' '))
+    return asciiToText(ascii)
+}
+
+export const partOne = (input: string) => getVisibleDotCount(input, 1)
+export const partTwo = (input: string) => getCode(input)

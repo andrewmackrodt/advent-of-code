@@ -1,4 +1,4 @@
-import { solve } from './index.js'
+import { getCode, getVisibleDotCount } from './index.js'
 
 describe('Day 13', () => {
     const input = `6,10
@@ -24,6 +24,16 @@ fold along y=7
 fold along x=5`
 
     it('returns the number of visible dots after the first fold', () => {
-        expect(solve(input, 1)).toEqual(17)
+        expect(getVisibleDotCount(input, 1)).toEqual(17)
+    })
+
+    it('returns the code', () => {
+        expect(getCode(input)).toEqual(`#####
+#   #
+#   #
+#   #
+#####
+     
+     `)
     })
 })
