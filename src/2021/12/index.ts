@@ -26,22 +26,33 @@ class PathBuilder {
     }
 }
 
+type PathVisitRecord = Record<string, { path: Path; visit: number }>
+
 class PathFinder {
     private routes: Path[][] = []
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    private constructor() { }
+    private constructor(
+        private readonly allowOnceSingleSmallCaveRevisit = false,
+    ) {
+    }
 
-    public static getRoutes(input: string): Path[][] {
+    public static getRoutes(input: string, allowOnceSingleSmallCaveRevisit = false): Path[][] {
         const start = PathBuilder.getStart(input)
 
-        return new this().traverse(start, [])
+        return new this(allowOnceSingleSmallCaveRevisit).traverse(start, [])
     }
 
     private traverse(path: Path, route: Path[]): Path[][] {
         route = [...route, path]
         if (path.name !== 'end') {
-            const traversable = path.siblings.filter(s => ! s.isSmall || ! route.includes(s))
+            const traversable = path.siblings.filter(s => (
+                ! s.isSmall ||
+                ! route.includes(s) ||
+                (this.allowOnceSingleSmallCaveRevisit &&
+                    s.name !== 'start' &&
+                    PathFinder.canRevisitSmallCave(route)
+                )
+            ))
             for (const sibling of traversable) {
                 this.traverse(sibling, route)
             }
@@ -49,6 +60,28 @@ class PathFinder {
             this.routes.push(route)
         }
         return this.routes
+    }
+
+    private static canRevisitSmallCave(route: Path[]): boolean {
+        return Object.values(PathFinder.getVisitedSmallCaves(route))
+            .map(n => n.visit)
+            .filter(p => p > 1).length === 0
+    }
+
+    private static getVisitedSmallCaves(route: Path[]): PathVisitRecord {
+        return route
+            .filter(p => (
+                p.name[0].toLowerCase() === p.name[0] &&
+                p.name !== 'start' &&
+                p.name !== 'end'
+            ))
+            .reduce((res, path) => {
+                if ( ! (path.name in res)) {
+                    res[path.name] = { path, visit: 0 }
+                }
+                res[path.name].visit++
+                return res
+            }, {} as PathVisitRecord)
     }
 }
 
@@ -65,8 +98,14 @@ class Path {
     }
 }
 
-export function solve(input: string): number {
-    const routes = PathFinder.getRoutes(input)
+export function solve(
+    input: string,
+    allowOnceSingleSmallCaveRevisit = false,
+): number {
+    const routes = PathFinder.getRoutes(input, allowOnceSingleSmallCaveRevisit)
 
     return routes.length
 }
+
+export const partOne = (input: string) => solve(input)
+export const partTwo = (input: string) => solve(input, true)
