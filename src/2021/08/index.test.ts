@@ -1,4 +1,4 @@
-import { solve } from './index.js'
+import { countOccurrences, sumOutputs } from './index.js'
 
 describe('Day 08', () => {
     const input = `be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
@@ -13,6 +13,10 @@ egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce`
 
     it('returns the number of times 1, 4, 7 or 8 appear in output values', () => {
-        expect(solve(input)).toEqual(26)
+        expect(countOccurrences(input, [2, 3, 4, 7])).toEqual(26)
+    })
+
+    it('returns the number of times 1, 4, 7 or 8 appear in output values', () => {
+        expect(sumOutputs(input)).toEqual(61229)
     })
 })

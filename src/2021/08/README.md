@@ -110,3 +110,66 @@ unique number of segments (highlighted above).
 
 <b>In the output values, how many times do digits <code>1</code>, <code>4</code>, <code>7</code>, or
 <code>8</code> appear?</b>
+
+### --- Part Two ---
+
+Through a little deduction, you should now be able to determine the remaining digits. Consider again
+the first example above:
+
+<pre>
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
+cdfeb fcadb cdfeb cdbaf</pre>
+
+After some careful analysis, the mapping between signal wires and segments only make sense in the
+following configuration:
+
+<pre>
+ dddd
+e    a
+e    a
+ ffff
+g    b
+g    b
+ cccc
+</pre>
+
+So, the unique signal patterns would correspond to the following digits:
+
+- <code>acedgfb</code>: <code>8</code>
+- <code>cdfbe</code>: <code>5</code>
+- <code>gcdfa</code>: <code>2</code>
+- <code>fbcad</code>: <code>3</code>
+- <code>dab</code>: <code>7</code>
+- <code>cefabd</code>: <code>9</code>
+- <code>cdfgeb</code>: <code>6</code>
+- <code>eafb</code>: <code>4</code>
+- <code>cagedb</code>: <code>0</code>
+- <code>ab</code>: <code>1</code>
+
+Then, the four digits of the output value can be decoded:
+
+- <code>cdfeb</code>: <code><b>5</b></code>
+- <code>fcadb</code>: <code><b>3</b></code>
+- <code>cdfeb</code>: <code><b>5</b></code>
+- <code>cdbaf</code>: <code><b>3</b></code>
+
+Therefore, the output value for this entry is <code><b>5353</b></code>.
+
+Following this same process for each entry in the second, larger example above, the output value of
+each entry can be determined:
+
+- <code>fdgacbe cefdb cefbgd gcbe</code>: <code>8394</code>
+- <code>fcgedb cgb dgebacf gc</code>: <code>9781</code>
+- <code>cg cg fdcagb cbg</code>: <code>1197</code>
+- <code>efabcd cedba gadfec cb</code>: <code>9361</code>
+- <code>gecf egdcabf bgf bfgea</code>: <code>4873</code>
+- <code>gebdcfa ecba ca fadegcb</code>: <code>8418</code>
+- <code>cefg dcbef fcge gbcadfe</code>: <code>4548</code>
+- <code>ed bcgafe cdgba cbgef</code>: <code>1625</code>
+- <code>gbdfcae bgc cg cgb</code>: <code>8717</code>
+- <code>fgae cfgab fg bagce</code>: <code>4315</code>
+
+Adding all of the output values in this larger example produces <code><b>61229</b></code>.
+
+For each entry, determine all of the wire/segment connections and decode the four-digit output
+values. <b>What do you get if you add up all of the output values?</b>
