@@ -1,4 +1,4 @@
-import { solve } from './index.js'
+import { getRiskLevelOfLowPoints, getLargestBasinsLengthMultiplied } from './index.js'
 
 describe('Day 09', () => {
     const input = `2199943210
@@ -8,6 +8,10 @@ describe('Day 09', () => {
 9899965678`
 
     it('returns the sum of the risk level of all low points', () => {
-        expect(solve(input)).toEqual(15)
+        expect(getRiskLevelOfLowPoints(input)).toEqual(15)
+    })
+
+    it('returns the length of 3 largest basins multiplied', () => {
+        expect(getLargestBasinsLengthMultiplied(input, 3)).toEqual(1134)
     })
 })

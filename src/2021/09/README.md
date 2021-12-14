@@ -37,3 +37,60 @@ sum of the risk levels of all low points in the heightmap is therefore <code><b>
 
 Find all of the low points on your heightmap. <b>What is the sum of the risk levels of all low
 points on your heightmap?</b>
+
+### --- Part Two ---
+
+Next, you need to find the largest basins so you know what areas are most important to avoid.
+
+A <b>basin</b> is all locations that eventually flow downward to a single low point. Therefore,
+every low point has a basin, although some basins are very small. Locations of height <code>9</code>
+do not count as being in any basin, and all other locations will always be part of exactly one
+basin.
+
+The <b>size</b> of a basin is the number of locations within the basin, including the low point. The
+example above has four basins.
+
+The top-left basin, size <code>3</code>:
+
+<pre>
+<b>21</b>99943210
+<b>3</b>987894921
+9856789892
+8767896789
+9899965678
+</pre>
+
+The top-right basin, size <code>9</code>:
+
+<pre>
+21999<b>43210</b>
+398789<b>4</b>9<b>21</b>
+985678989<b>2</b>
+8767896789
+9899965678
+</pre>
+
+The middle basin, size <code>14</code>:
+
+<pre>
+2199943210
+39<b>878</b>94921
+9<b>85678</b>9892
+<b>87678</b>96789
+9<b>8</b>99965678
+</pre>
+
+The bottom-right basin, size <code>9</code>:
+
+<pre>
+2199943210
+3987894921
+9856789<b>8</b>92
+876789<b>678</b>9
+98999<b>65678</b>
+</pre>
+
+Find the three largest basins and multiply their sizes together. In the above example, this is
+<code>9 * 14 * 9 = <b>1134</b></code>.
+
+<b>What do you get if you multiply together the sizes of the three largest basins?</b>
