@@ -1,4 +1,4 @@
-import { solve } from './index.js'
+import { getStepFlashesSynchronized, getTotalFlashes } from './index.js'
 
 describe('Day 11', () => {
     const input = `5483143223
@@ -13,6 +13,10 @@ describe('Day 11', () => {
 5283751526`
 
     it('returns the number flashes after 100 steps', () => {
-        expect(solve(input, 100)).toEqual(1656)
+        expect(getTotalFlashes(input, 100)).toEqual(1656)
+    })
+
+    it('returns the step all flashes are synchronized', () => {
+        expect(getStepFlashesSynchronized(input)).toEqual(195)
     })
 })
