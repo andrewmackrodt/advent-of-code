@@ -74,3 +74,16 @@ step 10, <code>B</code> occurs 1749 times, <code>C</code> occurs 298 times, <cod
 Apply 10 steps of pair insertion to the polymer template and find the most and least common elements
 in the result. <b>What do you get if you take the quantity of the most common element and subtract
 the quantity of the least common element?</b>
+
+### --- Part Two ---
+
+The resulting polymer isn't nearly strong enough to reinforce the submarine. You'll need to run more
+steps of the pair insertion process; a total of <b>40 steps</b> should do it.
+
+In the above example, the most common element is <code>B</code> (occurring
+<code>2192039569602</code> times) and the least common element is <code>H</code> (occurring
+<code>3849876073</code> times); subtracting these produces <code><b>2188189693529</b></code>.
+
+Apply <b>40</b> steps of pair insertion to the polymer template and find the most and least common
+elements in the result. <b>What do you get if you take the quantity of the most common element and
+subtract the quantity of the least common element?</b>

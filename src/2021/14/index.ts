@@ -17,38 +17,45 @@ function parse(input: string): PolymerInput {
     }
 }
 
-function step(template: string, rules: Record<string, string>): string {
-    const polymer = template.split('')
-    for (let i = 0; i < polymer.length - 1; i++) {
-        const pair = polymer.slice(i, i + 2).join('')
-        const insertion = rules[pair]
-        if (typeof insertion === 'undefined') continue
-        polymer.splice(i + 1, 0, insertion)
-        i++
-    }
-    return polymer.join('')
-}
-
-function getCountByLetter(text: string): Record<string, number> {
-    const res: Record<string, number> = {}
-    for (const c of text) {
-        if ( ! (c in res)) {
-            res[c] = 0
-        }
-        res[c]++
-    }
-    return res
-}
-
 export function solve(input: string, steps: number): number {
     const { template, rules } = parse(input)
-    let polymer = template
-    for (let i = 0; i < steps; i++) {
-        polymer = step(polymer, rules)
+    const countByLetter: Record<string, number> = {}
+    let countByPair: Record<string, number> = {}
+
+    for (const pair of Object.keys(rules).sort()) {
+        countByPair[pair] = 0
+        const [c1, c2] = pair.split('')
+        countByLetter[c1] = 0
+        countByLetter[c2] = 0
     }
-    const countByLetter = getCountByLetter(polymer)
+
+    for (let i = 0; i < template.length - 1; i++) {
+        const pair = template.substring(i, i + 2)
+        countByPair[pair]++
+        const [c1, c2] = pair.split('')
+        if (i === 0) countByLetter[c1]++
+        countByLetter[c2]++
+    }
+
+    for (let step = 0; step < steps; step++) {
+        const newCountByPair = Object.assign({}, countByPair)
+        for (const [pair, count] of Object.entries(countByPair)) {
+            if (count === 0) continue
+            const p1 = pair[0] + rules[pair]
+            const p2 = rules[pair] + pair[1]
+            newCountByPair[p1] += count
+            newCountByPair[p2] += count
+            newCountByPair[pair] -= count
+            countByLetter[rules[pair]] += count
+        }
+        countByPair = newCountByPair
+    }
+
     const counts = Object.values(countByLetter).sort((a, b) => a - b)
     const min = counts[0]
     const max = counts[counts.length - 1]
     return max - min
 }
+
+export const partOne = (input: string) => solve(input, 10)
+export const partTwo = (input: string) => solve(input, 40)
