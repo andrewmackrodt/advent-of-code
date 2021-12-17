@@ -15,4 +15,8 @@ describe('Day 15', () => {
     it('returns the lowest total risk', () => {
         expect(solve(input)).toEqual(40)
     })
+
+    it('returns the lowest total risk when cavern is 5x bigger', () => {
+        expect(solve(input, 5)).toEqual(315)
+    })
 })

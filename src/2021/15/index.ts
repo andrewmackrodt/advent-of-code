@@ -1,7 +1,26 @@
 const sum = (values: number[]) => values.reduce((sum, n) => sum + n, 0)
 
-export function solve(input: string): number {
+export function solve(input: string, multiply = 1): number {
     const cavern = input.split('\n').map(s => s.split('').map(c => parseInt(c, 10)))
+
+    // extend right
+    for (let y = 0, h = cavern.length; y < h; y++) {
+        const width = cavern[y].length
+        for (let i = 1; i < multiply; i++) {
+            cavern[y] = [
+                ...cavern[y],
+                ...cavern[y].slice(0, width)
+                    .map(n => n + i < 10 ? n + i : (n + i) % 9)]
+        }
+    }
+
+    // extend down
+    for (let i = 1, h = cavern.length; i < multiply; i++) {
+        for (let y = 0; y < h; y++) {
+            cavern.push(cavern[y].map(n => n + i < 10 ? n + i : (n + i) % 9))
+        }
+    }
+
     const width = cavern[0].length
     const height = cavern.length
 
@@ -24,3 +43,6 @@ export function solve(input: string): number {
 
     return sum(shortest.slice(1))
 }
+
+export const partOne = (input: string) => solve(input)
+export const partTwo = (input: string) => solve(input, 5)
