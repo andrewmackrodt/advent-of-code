@@ -150,3 +150,55 @@ Here are a few more examples of hexadecimal-encoded transmissions:
 
 Decode the structure of your hexadecimal-encoded BITS transmission; <b>what do you get if you add up
 the version numbers in all packets?</b>
+
+### --- Part Two ---
+
+Now that you have the structure of your transmission decoded, you can calculate the value of the
+expression it represents.
+
+Literal values (type ID <code>4</code>) represent a single number as described above. The remaining
+type IDs are more interesting:
+
+- Packets with type ID <code>0</code> are <b>sum</b> packets - their value is the sum of the values
+  of their sub-packets. If they only have a single sub-packet, their value is the value of the
+  sub-packet.
+- Packets with type ID <code>1</code> are <b>product</b> packets - their value is the result of
+  multiplying together the values of their sub-packets. If they only have a single sub-packet, their
+  value is the value of the sub-packet.
+- Packets with type ID <code>2</code> are <b>minimum</b> packets - their value is the minimum of the
+  values of their sub-packets.
+- Packets with type ID <code>3</code> are <b>maximum</b> packets - their value is the maximum of the
+  values of their sub-packets.
+- Packets with type ID <code>5</code> are <b>greater than</b> packets - their value is <b>1</b> if
+  the value of the first sub-packet is greater than the value of the second sub-packet; otherwise,
+  their value is <b>0</b>. These packets always have exactly two sub-packets.
+- Packets with type ID <code>6</code> are <b>less than</b> packets - their value is <b>1</b> if the
+  value of the first sub-packet is less than the value of the second sub-packet; otherwise, their
+  value is <b>0</b>. These packets always have exactly two sub-packets.
+- Packets with type ID <code>7</code> are <b>equal to</b> packets - their value is <b>1</b> if the
+  value of the first sub-packet is equal to the value of the second sub-packet; otherwise, their
+  value is <b>0</b>. These packets always have exactly two sub-packets.
+
+Using these rules, you can now work out the value of the outermost packet in your BITS transmission.
+
+For example:
+
+- <code>C200B40A82</code> finds the sum of <code>1</code> and <code>2</code>, resulting in the value
+  <code><b>3</b></code>.
+- <code>04005AC33890</code> finds the product of <code>6</code> and <code>9</code>, resulting in the
+  value <code><b>54</b></code>.
+- <code>880086C3E88112</code> finds the minimum of <code>7</code>, <code>8</code>, and
+  <code>9</code>, resulting in the value <code><b>7</b></code>.
+- <code>CE00C43D881120</code> finds the maximum of <code>7</code>, <code>8</code>, and
+  <code>9</code>, resulting in the value <code><b>9</b></code>.
+- <code>D8005AC2A8F0</code> produces <code>1</code>, because <code>5</code> is less than
+  <code>15</code>.
+- <code>F600BC2D8F</code> produces <code>0</code>, because <code>5</code> is not greater than
+  <code>15</code>.
+- <code>9C005AC2F8F0</code> produces <code>0</code>, because <code>5</code> is not equal to
+  <code>15</code>.
+- <code>9C0141080250320F1802104A08</code> produces <code>1</code>, because <code>1</code> +
+  <code>3</code> = <code>2</code> * <code>2</code>.
+
+<b>What do you get if you evaluate the expression represented by your hexadecimal-encoded BITS
+transmission?</b>

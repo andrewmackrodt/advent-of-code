@@ -1,22 +1,62 @@
-export interface Packet {
-    version: number
-    typeId: number
+export enum PACKET_TYPE {
+    TYPE_ID_SUM = 0,
+    TYPE_ID_PRODUCT = 1,
+    TYPE_ID_MINIMUM = 2,
+    TYPE_ID_MAXIMUM = 3,
+    TYPE_ID_LITERAL = 4,
+    TYPE_ID_GREATER_THAN = 5,
+    TYPE_ID_LESS_THAN = 6,
+    TYPE_ID_EQUAL_TO = 7,
 }
 
-export interface LiteralPacket extends Packet {
-    value: number
+export abstract class Packet {
+    public abstract readonly value: number
+
+    protected constructor(
+        public readonly version: number,
+        public readonly typeId: PACKET_TYPE,
+    ) { }
 }
 
-export interface OperatorPacket extends Packet {
-    packets: Packet[]
+export class LiteralPacket extends Packet {
+    public constructor(
+        version: number,
+        typeId: PACKET_TYPE,
+        public readonly value: number,
+    ) {
+        super(version, typeId)
+    }
 }
 
-export function isLiteralPacket(packet: Packet): packet is LiteralPacket {
-    return 'value' in packet
-}
+export class OperatorPacket extends Packet {
+    public constructor(
+        version: number,
+        typeId: PACKET_TYPE,
+        public readonly packets: Packet[] = [],
+    ) {
+        super(version, typeId)
+    }
 
-export function isOperatorPacket(packet: Packet): packet is OperatorPacket {
-    return 'packets' in packet
+    public get value(): number {
+        switch (this.typeId) {
+            case PACKET_TYPE.TYPE_ID_SUM:
+                return this.packets.reduce((sum, p) => sum + p.value, 0)
+            case PACKET_TYPE.TYPE_ID_PRODUCT:
+                return this.packets.reduce((product, p) => product * p.value, 1)
+            case PACKET_TYPE.TYPE_ID_MINIMUM:
+                return this.packets.map(p => p.value).sort((a, b) => a - b)[0]
+            case PACKET_TYPE.TYPE_ID_MAXIMUM:
+                return this.packets.map(p => p.value).sort((a, b) => b - a)[0]
+            case PACKET_TYPE.TYPE_ID_LITERAL:
+                throw new Error('logic error operator packet cannot have typeId 4')
+            case PACKET_TYPE.TYPE_ID_GREATER_THAN:
+                return Number(this.packets[0].value > this.packets[1].value)
+            case PACKET_TYPE.TYPE_ID_LESS_THAN:
+                return Number(this.packets[0].value < this.packets[1].value)
+            case PACKET_TYPE.TYPE_ID_EQUAL_TO:
+                return Number(this.packets[0].value === this.packets[1].value)
+        }
+    }
 }
 
 export function decode(input: string): Packet {
@@ -62,9 +102,9 @@ export function decode(input: string): Packet {
                     }
                 }
                 const value = parseInt(literalBuffer.join(''), 2)
-                return { version, typeId, value } as LiteralPacket
+                return new LiteralPacket(version, typeId, value)
             default:
-                const result: OperatorPacket = { version, typeId, packets: [] }
+                const result = new OperatorPacket(version, typeId)
                 switch (readInt(1)) {
                     case 0:
                         for (
@@ -91,7 +131,7 @@ export function decode(input: string): Packet {
 export function sumPacketVersions(input: string): number {
     const sumVersions = (packet: Packet) => {
         let sum = packet.version
-        if (isOperatorPacket(packet)) {
+        if (packet instanceof OperatorPacket) {
             for (const p of packet.packets) {
                 sum += sumVersions(p)
             }
@@ -101,3 +141,6 @@ export function sumPacketVersions(input: string): number {
     const packet = decode(input)
     return sumVersions(packet)
 }
+
+export const partOne = (input: string) => sumPacketVersions(input)
+export const partTwo = (input: string) => decode(input).value
