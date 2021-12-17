@@ -1,0 +1,26 @@
+const sum = (values: number[]) => values.reduce((sum, n) => sum + n, 0)
+
+export function solve(input: string): number {
+    const cavern = input.split('\n').map(s => s.split('').map(c => parseInt(c, 10)))
+    const width = cavern[0].length
+    const height = cavern.length
+
+    const visited: Record<string, number[]> = {}
+
+    const traverse = (x = 0, y = 0): number[] => {
+        const path = [cavern[y][x]]
+        const key = `${x},${y}`
+        if (key in visited) return [...path, ...visited[key]]
+        const neighbours: [number, number][] = []
+        if (x < width - 1) neighbours.push([x + 1, y])
+        if (y < height - 1) neighbours.push([x, y + 1])
+        if (neighbours.length === 0) return path
+        const res = neighbours.map(n => traverse(n[0], n[1])).sort((a, b) => sum(a) - sum(b))[0]
+        visited[key] = res
+        return [...path, ...res]
+    }
+
+    const shortest = traverse()
+
+    return sum(shortest.slice(1))
+}
