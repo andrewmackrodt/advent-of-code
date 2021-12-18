@@ -15,6 +15,10 @@ interface Velocity {
     ySpeed: number
 }
 
+interface VelocityResult extends Velocity {
+    maxHeight: number
+}
+
 enum SearchState {
     InProgress,
     Hit,
@@ -35,18 +39,7 @@ function parseInput(input: string): PointArea {
         }, {} as Record<string, number>) as any
 }
 
-function factorial(n: number): number {
-    return n > 1 ? n + factorial(n - 1) : n
-}
-
-export function getMaxY(input: string): number {
-    const targetArea = parseInput(input)
-
-    // when y1 === -10, highest y velocity === 45, i.e. 9!
-    return factorial((targetArea.y1 * -1) - 1)
-}
-
-export function getUniqueValidVelocityCount(input: string): number {
+function getVelocities(input: string): VelocityResult[] {
     const targetArea = parseInput(input)
 
     const searchRange: PointArea = {
@@ -87,7 +80,7 @@ export function getUniqueValidVelocityCount(input: string): number {
 
     const isBeyondTargetArea = () => trajectory.x > targetArea.x2 || trajectory.y < targetArea.y1
 
-    const valid: Velocity[] = []
+    const velocities: VelocityResult[] = []
 
     for (let y = searchRange.y1; y <= searchRange.y2; y++) {
         // this could be optimized depending on the y value, e.g.
@@ -98,10 +91,12 @@ export function getUniqueValidVelocityCount(input: string): number {
 
             let searchState: SearchState = SearchState.InProgress
 
-            for (let i = 0; searchState === SearchState.InProgress; i++) {
+            for (let i = 0, maxY = trajectory.y; searchState === SearchState.InProgress; i++) {
                 step()
+                if (trajectory.y > maxY) maxY = trajectory.y
                 if (isInTargetArea()) {
                     searchState = SearchState.Hit
+                    velocities.push({ ...speed, ...{ maxHeight: maxY } })
                     break
                 }
                 if (isBeyondTargetArea()) {
@@ -109,14 +104,20 @@ export function getUniqueValidVelocityCount(input: string): number {
                     break
                 }
             }
-
-            if (searchState === SearchState.Hit) {
-                valid.push(speed)
-            }
         }
     }
 
-    return valid.length
+    return velocities
+}
+
+export function getMaxY(input: string): number {
+    const velocities = getVelocities(input).sort((a, b) => b.ySpeed - a.ySpeed)
+
+    return velocities[0].maxHeight
+}
+
+export function getUniqueValidVelocityCount(input: string): number {
+    return getVelocities(input).length
 }
 
 export const partOne = (input: string) => getMaxY(input)
