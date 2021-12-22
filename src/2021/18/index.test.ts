@@ -1,4 +1,4 @@
-import { SnailfishUtils, getMagnitudeOfFinalSum, Tree, TreeArray } from './index.js'
+import { SnailfishUtils, getMagnitudeOfFinalSum, Tree, TreeArray, getLargestMagnitudeOf2 } from './index.js'
 
 type TestCase<R = TreeArray<number>> = {
     input: TreeArray<number>
@@ -128,5 +128,9 @@ describe('Day 18', () => {
 
     it('returns the magnitude of the final sum', () => {
         expect(getMagnitudeOfFinalSum(input)).toEqual(4140)
+    })
+
+    it('returns the largest magnitude of any sum of two numbers', () => {
+        expect(getLargestMagnitudeOf2(input)).toEqual(3993)
     })
 })

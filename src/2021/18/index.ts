@@ -222,6 +222,34 @@ export function getMagnitudeOfFinalSum(input: string): number {
     return SnailfishUtils.magnitude(tree)
 }
 
-//region internal
+export function getLargestMagnitudeOf2(input: string): number {
+    const treeArrays = input.split('\n')
+        .filter(s => s.match(/^\[[0-9,\[\]]+\]$/))
+        .map(s => JSON.parse(s) as TreeArray<number>)
+
+    const getMagnitude = (one: TreeArray<number>, two: TreeArray<number>) => (
+        SnailfishUtils.magnitude(
+            SnailfishUtils.sum(
+                Tree.createFromArray(one),
+                Tree.createFromArray(two),
+            ),
+        )
+    )
+
+    let max = 0
+    for (let i = 0; i < treeArrays.length - 1; i++) {
+        const treeArray1 = treeArrays[i]
+        for (let j = i + 1; j < treeArrays.length; j++) {
+            const treeArray2 = treeArrays[j]
+            const res1 = getMagnitude(treeArray1, treeArray2)
+            const res2 = getMagnitude(treeArray2, treeArray1)
+            const curMax = Math.max(res1, res2)
+            if (curMax > max) max = curMax
+        }
+    }
+
+    return max
+}
+
 export const partOne = (input: string) => getMagnitudeOfFinalSum(input)
-export const partTwo = (input: string) => { console.log('n/a') }
+export const partTwo = (input: string) => getLargestMagnitudeOf2(input)
