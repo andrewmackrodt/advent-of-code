@@ -14,7 +14,7 @@ function parseInput(input: string): InputImage {
     }
 }
 
-function enhanceImage(input: InputImage, iterations = 2): Image {
+function enhanceImage(input: InputImage, iterations: number): Image {
     let outputImage = input.image
     for (let i = 0; i < iterations; i++) {
         const inputImage = outputImage
@@ -47,13 +47,12 @@ function enhanceImage(input: InputImage, iterations = 2): Image {
     return outputImage
 }
 
-export function solve(input: string): number {
+export function solve(input: string, iterations: number): number {
     const inputImage = parseInput(input)
-    const outputImage = enhanceImage(inputImage)
+    const outputImage = enhanceImage(inputImage, iterations)
 
     return outputImage.map(s => s.filter(b => b)).flat().length
 }
 
-//region internal
-export const partOne = (input: string) => solve(input)
-export const partTwo = (input: string) => undefined
+export const partOne = (input: string) => solve(input, 2)
+export const partTwo = (input: string) => solve(input, 50)

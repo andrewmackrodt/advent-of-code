@@ -146,3 +146,14 @@ original input image twice, <code><b>35</b></code> pixels are lit.
 Start with the original input image and apply the image enhancement algorithm twice, being careful
 to account for the infinite size of the images. <b>How many pixels are lit in the resulting
 image?</b>
+
+### --- Part Two ---
+
+You still can't quite make out the details in the image. Maybe you just didn't
+[enhance](https://en.wikipedia.org/wiki/Kernel_(image_processing)) it enough.
+
+If you enhance the starting input image in the above example a total of <b>50</b> times,
+<code><b>3351</b></code> pixels are lit in the final output image.
+
+Start again with the original input image and apply the image enhancement algorithm 50 times. <b>How
+many pixels are lit in the resulting image?</b>

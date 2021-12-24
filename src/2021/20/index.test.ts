@@ -15,7 +15,11 @@ describe('Day 20', () => {
 ..#..
 ..###`
 
-    it('returns the number of lit pixels', () => {
-        expect(solve(input)).toEqual(35)
+    it('returns the number of lit pixels when enhance times is 2', () => {
+        expect(solve(input, 2)).toEqual(35)
+    })
+
+    it('returns the number of lit pixels when enhance times is 50', () => {
+        expect(solve(input, 50)).toEqual(3351)
     })
 })
