@@ -85,23 +85,17 @@ export function partTwo(input: string): number {
 
         const result: QuantumResult = { p1: 0, p2: 0 }
 
-        for (const [p1Roll, p1Count] of rollCounts) {
-            const np1 = p1.clone()
-            np1.increment(p1Roll)
-            if (np1.score < 21) {
-                for (const [p2Roll, p2Count] of rollCounts) {
-                    const np2 = p2.clone()
-                    np2.increment(p2Roll)
-                    if (np2.score < 21) {
-                        const next = getQuantumResult(np1, np2)
-                        result.p1 += next.p1 * p1Count * p2Count
-                        result.p2 += next.p2 * p1Count * p2Count
-                    } else {
-                        result.p2 += p2Count
-                    }
-                }
-            } else {
-                result.p1 += p1Count
+        if (p1.score >= 21) {
+            result.p1++
+        } else if (p2.score >= 21) {
+            result.p2++
+        } else {
+            for (const [roll, count] of rollCounts) {
+                const np1 = p1.clone()
+                np1.increment(roll)
+                const next = getQuantumResult(p2, np1)
+                result.p1 += next.p2 * count
+                result.p2 += next.p1 * count
             }
         }
 
