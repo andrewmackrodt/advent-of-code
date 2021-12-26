@@ -93,15 +93,21 @@ export function parseInput(input: string): Instruction[][] {
 }
 
 // https://www.reddit.com/r/adventofcode/comments/rnejv5/comment/hpuo5c6/
-function monad(instructions: Instruction[][]): number {
+function monad(instructions: Instruction[][], biggest = true): number {
     const result = Array<number>(14)
     const stack: [number, number][] = []
     for (let i = 0; i < 14; i++) {
         const addX = instructions[i][5][2] as number
         if (addX <= 0) {
             const [addY, y] = stack.pop()!
-            let add = 9
-            while (add + addY + addX > 9) add--
+            let add: number
+            if (biggest) {
+                add = 9
+                while (add + addY + addX > 9) add--
+            } else {
+                add = 1
+                while (add + addY + addX < 1) add++
+            }
             result[y] = add
             result[i] = add + addY + addX
         } else {
@@ -120,14 +126,13 @@ function verify(instructions: Instruction[][], serial: number) {
     }
 }
 
-export function solve(input: string): number {
+export function solve(input: string, biggest = true): number {
     const instructions = parseInput(input)
-    const serial = monad(instructions)
+    const serial = monad(instructions, biggest)
     verify(instructions, serial)
 
     return serial
 }
 
-//region internal
 export const partOne = (input: string) => solve(input)
-export const partTwo = (input: string) => undefined
+export const partTwo = (input: string) => solve(input, false)

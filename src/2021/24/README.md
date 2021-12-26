@@ -105,3 +105,11 @@ You'll need to <b>figure out what MONAD does</b> some other way.
 
 To enable as many submarine features as possible, find the largest valid fourteen-digit model number
 that contains no <code>0</code> digits. <b>What is the largest model number accepted by MONAD?</b>
+
+### --- Part Two ---
+
+As the submarine starts booting up things like the [Retro
+Encabulator](https://www.youtube.com/watch?v=RXJKdh1KZ0w), you realize that maybe you don't need all
+these submarine features after all.
+
+<b>What is the smallest model number accepted by MONAD?</b>
