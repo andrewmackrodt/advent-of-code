@@ -1,4 +1,4 @@
-import { solve } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 describe('Day 23', () => {
     const input = `#############
@@ -7,7 +7,11 @@ describe('Day 23', () => {
   #A#D#C#A#
   #########`
 
-    it('returns the least energy to room all amphipods', () => {
-        expect(solve(input)).toEqual(12521)
+    it('partOne returns the least energy to room all amphipods', () => {
+        expect(partOne(input)).toEqual(12521)
+    })
+
+    it('partTwo returns the least energy to room all amphipods', () => {
+        expect(partTwo(input)).toEqual(44169)
     })
 })

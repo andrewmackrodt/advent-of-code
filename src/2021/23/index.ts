@@ -1,4 +1,3 @@
-import { readFileSync } from 'fs'
 import { PriorityQueue } from '../../utils/PriorityQueue.js'
 
 type Amphipod = 'A' | 'B' | 'C' | 'D'
@@ -265,9 +264,10 @@ class Organizer {
     }
 
     private getSteps(amphipod: Amphipod, pos: number): TileStep[] {
+        const startedInHall = pos < HALL_SIZE
         let steps = 0
 
-        if (pos >= HALL_SIZE) {
+        if ( ! startedInHall) {
             // no moves if all amphipods of type are in the correct room
             if (this.isRoomDone(amphipod)) {
                 return []
@@ -302,12 +302,18 @@ class Organizer {
             }
         }
 
+        // amphipod cannot move to another position in the hall
+        // and it is unable to go to the destination room
+        if (startedInHall) {
+            return []
+        }
+
         // else return all eligible hall positions and the energy cost
         return this.getHallSteps(pos).map(([pos, posSteps]) => [pos, posSteps + steps])
     }
 }
 
-export function solve(input: string): number {
+export function partOne(input: string): number {
     const { energy, steps } = Organizer.organize(input)
 
     const print = ([state, energy]: [string, number]) => {
@@ -332,6 +338,8 @@ export function solve(input: string): number {
     return energy
 }
 
-//region internal
-export const partOne = (input: string) => solve(input)
-export const partTwo = (input: string) => undefined
+export function partTwo(input: string): number {
+    const newInput = input.replace(/[^A-D]/g, '').replace(/^([A-D]{4})/, '$1DCBADBAC')
+
+    return partOne(newInput)
+}
