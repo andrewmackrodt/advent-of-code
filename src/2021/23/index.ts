@@ -1,5 +1,3 @@
-import { PriorityQueue } from '../../utils/PriorityQueue.js'
-
 type Amphipod = 'A' | 'B' | 'C' | 'D'
 type Tile = Amphipod | '.'
 type TileStep = [number, number]
@@ -60,17 +58,31 @@ class Organizer {
         const cache = { [endState]: Number.MAX_SAFE_INTEGER }
         const organizer = new Organizer(initialState, endState, roomSize, cache)
 
-        const queue = new PriorityQueue<[Organizer, number]>((a, b) => a[1] < b[1])
+        const queue: [Organizer, number][] = []
         queue.push([organizer, 0])
 
         let best: Result = { energy: Number.MAX_SAFE_INTEGER, steps: [] }
 
-        for (const [organizer] of queue) {
-            const res = organizer.traverse(queue)
+        for (const [organizer, energy] of queue) {
+            const strState = organizer.state.join('')
+            organizer.steps.push([strState, energy])
 
-            if (res && res.energy < best.energy) {
-                best = res
+            if (strState === endState) {
+                if (process?.env.DEBUG) {
+                    process.stdout.write(`found solution requiring ${organizer.steps.length} steps and ${energy} energy\n`)
+                }
+
+                if (energy < best.energy) {
+                    best = {
+                        energy: organizer.energy,
+                        steps: organizer.steps,
+                    }
+
+                    continue
+                }
             }
+
+            organizer.traverse(queue)
         }
 
         if (best.steps.length === 0) {
@@ -80,26 +92,7 @@ class Organizer {
         return best
     }
 
-    private traverse(queue: PriorityQueue<[Organizer, number]>): Result | undefined {
-        const strState = this.state.join('')
-        this.steps.push([strState, this.energy])
-
-        if (strState === this.endState) {
-            if (process?.env.DEBUG) {
-                process.stdout.write(`found solution requiring ${this.steps.length} steps and ${this.energy} energy\n`)
-            }
-
-            return {
-                energy: this.energy,
-                steps: this.steps,
-            }
-        }
-
-        // add a simple heuristic to abort if estimated energy to reach goal state is more than the found solution
-        if (this.isStateOverBudget()) {
-            return
-        }
-
+    private traverse(queue: [Organizer, number][]) {
         for (let from = 0; from < this.state.length; from++) {
             if (this.state[from] === '.') {
                 continue
@@ -137,28 +130,6 @@ class Organizer {
                 queue.push([next, nextEnergy])
             }
         }
-    }
-
-    private isStateOverBudget(): boolean {
-        let minEnergyEstimate = this.energy
-
-        for (let pos = 0; pos < this.state.length; pos++) {
-            if (this.state[pos] === '.') continue
-            const amphipod = this.state[pos] as Amphipod
-            const room = ROOM_TARGETS.indexOf(amphipod)
-            const entrance = ROOM_ENTRANCES[room]
-            if (pos >= HALL_SIZE) {
-                const curRoom = (pos - HALL_SIZE) % ROOM_COUNT
-                if (curRoom !== room) {
-                    const curEntrance = ROOM_ENTRANCES[curRoom]
-                    minEnergyEstimate += (Math.abs(curEntrance - entrance) + 2) * ENERGY[amphipod]
-                }
-            } else {
-                minEnergyEstimate += (Math.abs(pos - entrance) + 1) * ENERGY[amphipod]
-            }
-        }
-
-        return minEnergyEstimate > this.cache[this.endState]
     }
 
     private isRoomDone(amphipod: Amphipod): boolean {
