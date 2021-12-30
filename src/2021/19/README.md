@@ -420,3 +420,14 @@ The full list of beacons (relative to scanner <code>0</code>) is:
 In total, there are <code><b>79</b></code> beacons.
 
 Assemble the full map of beacons. <b>How many beacons are there?</b>
+
+### --- Part Two ---
+
+Sometimes, it's a good idea to appreciate just how big the ocean is. Using the [Manhattan
+distance](https://en.wikipedia.org/wiki/Taxicab_geometry), how far apart do the scanners get?
+
+In the above example, scanners <code>2</code> (<code>1105,-1205,1229</code>) and <code>3</code>
+(<code>-92,-2380,-20</code>) are the largest Manhattan distance apart. In total, they are <code>1197
++ 1175 + 1249 = <b>3621</b></code> units apart.
+
+<b>What is the largest Manhattan distance between any two scanners?</b>

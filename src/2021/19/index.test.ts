@@ -1,4 +1,4 @@
-import { solve } from './index.js'
+import { countBeacons, getLargestManhattanDistance, mergeScannerReports } from './index.js'
 
 describe('Day 19', () => {
     const input = `--- scanner 0 ---
@@ -139,6 +139,22 @@ describe('Day 19', () => {
 30,-46,-14`
 
     it('returns the total number of beacons', () => {
-        expect(solve(input)).toEqual(79)
+        expect(countBeacons(input)).toEqual(79)
+    })
+
+    it('resolves the scanner positions', () => {
+        const [_, scanners] = mergeScannerReports(input)
+
+        expect(scanners).toEqual([
+            { x:    0, y:     0, z:    0 },
+            { x:   68, y: -1246, z:  -43 },
+            { x:  -92, y: -2380, z:  -20 },
+            { x:  -20, y: -1133, z: 1061 },
+            { x: 1105, y: -1205, z: 1229 },
+        ])
+    })
+
+    it('returns the largest manhattan distance between 2 scanners', () => {
+        expect(getLargestManhattanDistance(input)).toEqual(3621)
     })
 })
