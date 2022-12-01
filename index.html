@@ -249,7 +249,7 @@
             .split(/[/,]/, 3)
             .map(s => parseInt(s, 10))
         const maxYear = nowMonth < 12 ? nowYear - 1 : nowYear
-        for (let year = 2022; year <= maxYear; year++) {
+        for (let year = 2021; year <= maxYear; year++) {
             manifest[year] = [];
             const maxDay = year < maxYear || nowMonth < 12 ? 25 : Math.min(nowDay, 25)
             for (let day = 1; day <= maxDay; day++) {
