@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 describe('solve', () => {
     const input = `1000
@@ -18,5 +18,9 @@ describe('solve', () => {
 
     it('returns the highest calories carried', () => {
         expect(partOne(input)).toEqual(24000)
+    })
+
+    it('returns the sum of the highest 3 calories carried', () => {
+        expect(partTwo(input)).toEqual(45000)
     })
 })
