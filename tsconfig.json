@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "strict": true,
+    "target": "ES2021"
+  },
+  "exclude": [
+    "./src/**/*.test.ts",
+    "./src/update.ts",
+    "./jest.config.ts"
+  ],
+  "include": [
+    "./src/**/*.ts"
+  ]
+}

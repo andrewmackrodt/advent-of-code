@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Update" type="TypeScriptProgramRunner" factoryName="TypeScript">
+    <module name="advent-of-code" />
+    <option name="interpreterRef" value="project" />
+    <option name="enabledTsNodeEsmLoader" value="true" />
+    <option name="interpreterOptions" value="--no-warnings" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <option name="tsconfigFile" value="" />
+    <option name="extraTypeScriptOptions" value="" />
+    <option name="scriptName" value="$PROJECT_DIR$/src/update.ts" />
+    <option name="programParameters" value="" />
+    <option name="tsnodePackage" value="$PROJECT_DIR$/node_modules/ts-node" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

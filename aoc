@@ -1,0 +1,75 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+
+function build() {
+  clean
+  echo -n "Building src .. "
+  tsc --outDir "out"
+  echo "ok"
+  cd src
+  local manifest="{"
+  for yearFolder in $(find . -mindepth 1 -maxdepth 1 -type d -name '20*' | sort -n); do
+    cd "$yearFolder"
+    year=$(basename "$(pwd)")
+    manifest+="${year}:["
+    for dayFolder in $(find . -mindepth 1 -maxdepth 1 -type d | sort -n); do
+      cd "$dayFolder"
+      basename=$(basename "$(pwd)")
+      echo -n "Copying files for ${year}/${basename} .. "
+      find . -mindepth 1 -maxdepth 1 -type f -not -name '*.ts' -exec cp {} "../../../out/${year}/${basename}" \;
+      perl -0777 -ne "print \$1 if /input = [\`']([^\`']+)/" index.test.ts >"../../../out/${year}/${basename}/sample.txt"
+      manifest+="$(echo "$basename" | sed -E 's/^0//g'),"
+      echo "ok"
+      cd ..
+    done
+    manifest+="],"
+    cd ..
+  done
+  manifest+="}"
+  manifest=$(echo "$manifest" | sed -E 's/,(\])|,(\})/\1\2/g')
+  cd ..
+  cat index.html | sed -E 's#<script>(var |window\.)?manifest ?= ?[^<]+</script>#<script>\1manifest = '"$manifest"'</script>#' >out/index.html
+}
+
+function clean() {
+  if [[ -d "out" ]]; then
+    find "out" -xdev -type f -delete
+    find "out" -xdev -type d -delete
+  fi
+}
+
+function solve() {
+  local args=$@
+  [[ "$args" == "" ]] && args=$(seq 1 25)
+  IFS=$'\n\t '
+  for d in $args; do
+    NODE_OPTIONS='--no-warnings' node --loader ts-node/esm/transpile-only src/index.ts "$d"
+  done
+  IFS=$'\n\t'
+}
+
+function test() {
+  local args=$( \
+    echo " $@ " \
+      | perl -pe 's#\b([1-9])\b#0\1#g' \
+      | perl -pe 's# ([0-9]{2}) # src/2022/\1/ #g' \
+      | perl -pe 's# ([0-9]{2}) # src/2022/\1/ #g' \
+      | perl -pe 's/^ | $//g' \
+    )
+  IFS=$'\n\t '
+  NODE_OPTIONS='--experimental-vm-modules --no-warnings' jest $args
+  IFS=$'\n\t'
+}
+
+function update() {
+  NODE_OPTIONS='--no-warnings' node --loader ts-node/esm/transpile-only src/update.ts "$@"
+}
+
+case "${1:-build}" in
+  build ) build ;;
+  clean ) clean ;;
+  solve | test | update ) cmd=$1; shift; $cmd "$@" ;;
+  * ) echo "ERROR" >&2 && exit 1
+esac
