@@ -10,11 +10,25 @@ enum Result {
     Draw = 3,
 }
 
-function getSelection(c: string): Selection {
-    if (c === 'A' || c === 'X') return Selection.Rock
-    if (c === 'B' || c === 'Y') return Selection.Paper
-    if (c === 'C' || c === 'Z') return Selection.Scissors
-    throw new Error('Invalid selection')
+function getSelection(p1: string, p2: string, elfStrategy: boolean): [Selection, Selection] {
+    const theirs = (p1 === 'A' ? Selection.Rock : (p1 === 'B' ? Selection.Paper : Selection.Scissors))
+    let ours: Selection
+    if (elfStrategy) {
+        switch (p2) {
+            case 'X':
+                ours = theirs - 1 > 0 ? theirs - 1 : 3
+                break
+            case 'Y':
+                ours = theirs
+                break
+            default:
+                ours = theirs + 1 <= 3 ? theirs + 1 : 1
+                break
+        }
+    } else {
+        ours = (p2 === 'X' ? Selection.Rock : (p2 === 'Y' ? Selection.Paper : Selection.Scissors))
+    }
+    return [theirs, ours]
 }
 
 function getScore(theirs: Selection, ours: Selection): number {
@@ -31,11 +45,12 @@ function getScore(theirs: Selection, ours: Selection): number {
     return getResult() + ours
 }
 
-export function solve(input: string): number {
+export function solve(input: string, elfStrategy = false): number {
     return input.split('\n').filter(s => Boolean(s))
-        .map(s => s.split(/\s+/g).map(c => getSelection(c)))
+        .map(s => getSelection(s.split(/\s+/g)[0], s.split(/\s+/g)[1], elfStrategy))
         .map(a => getScore(a[0], a[1]))
         .reduce((total, n) => total + n, 0)
 }
 
 export const partOne = (input: string) => solve(input)
+export const partTwo = (input: string) => solve(input, true)

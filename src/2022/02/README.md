@@ -48,3 +48,25 @@ In this example, if you were to follow the strategy guide, you would get a total
 <code><b>15</b></code> (8 + 1 + 6).
 
 <b>What would your total score be if everything goes exactly according to your strategy guide?</b>
+
+### --- Part Two ---
+
+The Elf finishes helping with the tent and sneaks back over to you. "Anyway, the second column says
+how the round needs to end: <code>X</code> means you need to lose, <code>Y</code> means you need to
+end the round in a draw, and <code>Z</code> means you need to win. Good luck!"
+
+The total score is still calculated in the same way, but now you need to figure out what shape to
+choose so the round ends as indicated. The example above now goes like this:
+
+- In the first round, your opponent will choose Rock (<code>A</code>), and you need the round to end
+  in a draw (<code>Y</code>), so you also choose Rock. This gives you a score of 1 + 3 = <b>4</b>.
+- In the second round, your opponent will choose Paper (<code>B</code>), and you choose Rock so you
+  lose (<code>X</code>) with a score of 1 + 0 = <b>1</b>.
+- In the third round, you will defeat your opponent's Scissors with Rock for a score of 1 + 6 =
+  <b>7</b>.
+
+Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total
+score of <code><b>12</b></code>.
+
+Following the Elf's instructions for the second column, <b>what would your total score be if
+everything goes exactly according to your strategy guide?</b>
