@@ -60,3 +60,21 @@ would be exclusively cleaning sections their partner will already be cleaning, s
 the most in need of reconsideration. In this example, there are <code><b>2</b></code> such pairs.
 
 <b>In how many assignment pairs does one range fully contain the other?</b>
+
+### --- Part Two ---
+
+It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to
+know the number of pairs that <b>overlap at all</b>.
+
+In the above example, the first two pairs (<code>2-4,6-8</code> and <code>2-3,4-5</code>) don't
+overlap, while the remaining four pairs (<code>5-7,7-9</code>, <code>2-8,3-7</code>,
+<code>6-6,4-6</code>, and <code>2-6,4-8</code>) do overlap:
+
+- <code>5-7,7-9</code> overlaps in a single section, <code>7</code>.
+- <code>2-8,3-7</code> overlaps all of the sections <code>3</code> through <code>7</code>.
+- <code>6-6,4-6</code> overlaps in a single section, <code>6</code>.
+- <code>2-6,4-8</code> overlaps in sections <code>4</code>, <code>5</code>, and <code>6</code>.
+
+So, in this example, the number of overlapping assignment pairs is <code><b>4</b></code>.
+
+<b>In how many assignment pairs do the ranges overlap?</b>
