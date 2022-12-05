@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 describe('solve', () => {
     const input = `    [D]    
@@ -13,5 +13,9 @@ move 1 from 1 to 2`
 
     it('returns part one answer', () => {
         expect(partOne(input)).toEqual('CMZ')
+    })
+
+    it('returns part two answer', () => {
+        expect(partTwo(input)).toEqual('MCD')
     })
 })

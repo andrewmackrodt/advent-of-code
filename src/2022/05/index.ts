@@ -1,6 +1,6 @@
 const moveRegExp = new RegExp(/^move (?<qty>[0-9]+) from (?<source>[0-9]+) to (?<target>[0-9]+)/)
 
-export function partOne(input: string): string {
+export function solve(input: string, group = false): string {
     const lines = input.replaceAll(/[ \t]+$/gm, '').split('\n')
     const stacks: string[][] = []
     for (const line of lines) {
@@ -20,13 +20,20 @@ export function partOne(input: string): string {
             const source = parseInt(move.groups!.source) - 1
             const target = parseInt(move.groups!.target) - 1
 
-            for (let i = 0; i < qty; i++) {
-                if (stacks[source].length === 0) {
-                    break
+            if ( ! group) {
+                for (let i = 0; i < qty; i++) {
+                    if (stacks[source].length === 0) {
+                        break
+                    }
+                    stacks[target].push(stacks[source].pop()!)
                 }
-                stacks[target].push(stacks[source].pop()!)
+            } else {
+                stacks[target].push(...stacks[source].splice(-qty))
             }
         }
     }
     return Object.values(stacks).map(stack => stack.pop()).join('')
 }
+
+export const partOne = (input: string) => solve(input, false)
+export const partTwo = (input: string) => solve(input, true)
