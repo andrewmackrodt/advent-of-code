@@ -51,3 +51,23 @@ Here are a few more examples:
 - <code>zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw</code>: first marker after character <code><b>11</b></code>
 
 <b>How many characters need to be processed before the first start-of-packet marker is detected?</b>
+
+### --- Part Two ---
+
+Your device's communication system is correctly detecting packets, but still isn't working. It looks
+like it also needs to look for <b>messages</b>.
+
+A <b>start-of-message marker</b> is just like a start-of-packet marker, except it consists of <b>14
+distinct characters</b> rather than 4.
+
+Here are the first positions of start-of-message markers for all of the above examples:
+
+- <code>mjqjpqmgbljsphdztnvjfqwrcgsmlb</code>: first marker after character <code><b>19</b></code>
+- <code>bvwbjplbgvbhsrlpgdmjqwftvncz</code>: first marker after character <code><b>23</b></code>
+- <code>nppdvjthqldpwncqszvftbrmjlhg</code>: first marker after character <code><b>23</b></code>
+- <code>nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg</code>: first marker after character
+  <code><b>29</b></code>
+- <code>zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw</code>: first marker after character <code><b>26</b></code>
+
+<b>How many characters need to be processed before the first start-of-message marker is
+detected?</b>

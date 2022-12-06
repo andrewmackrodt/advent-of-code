@@ -1,19 +1,27 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 const input = 'mjqjpqmgbljsphdztnvjfqwrcgsmlb'
 
-describe('part one', () => {
-    const partOneInputs = {
-        [input]: 7,
-        bvwbjplbgvbhsrlpgdmjqwftvncz: 5,
-        nppdvjthqldpwncqszvftbrmjlhg: 6,
-        nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg: 10,
-        zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw: 11,
-    }
+const inputs = {
+    [input]: [7, 19],
+    bvwbjplbgvbhsrlpgdmjqwftvncz: [5, 23],
+    nppdvjthqldpwncqszvftbrmjlhg: [6, 23],
+    nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg: [10, 29],
+    zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw: [11, 26],
+}
 
-    Object.entries(partOneInputs).forEach(([input, expectation], i) => {
+describe('part one', () => {
+    Object.entries(inputs).forEach(([input, [expectation]], i) => {
         it(`returns answer [${i}]`, () => {
             expect(partOne(input)).toEqual(expectation)
+        })
+    })
+})
+
+describe('part two', () => {
+    Object.entries(inputs).forEach(([input, [_, expectation]], i) => {
+        it(`returns answer [${i}]`, () => {
+            expect(partTwo(input)).toEqual(expectation)
         })
     })
 })
