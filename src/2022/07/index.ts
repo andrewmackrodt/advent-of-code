@@ -1,26 +1,6 @@
 type Stat = (number | Stat)[]
 
-function calculateSize(array: Stat, maxSize = 100000): [number, number] {
-    let sizeSubDirs = 0
-    let sizeFiles = 0
-    let sizeSubDirsLessThanMaxSize = 0
-    for (const item of array) {
-        if (Array.isArray(item)) {
-            const [sizeSubDir, sizeSubDirLessThanMaxSize] = calculateSize(item, maxSize)
-            sizeSubDirs += sizeSubDir
-            sizeSubDirsLessThanMaxSize += sizeSubDirLessThanMaxSize
-        } else {
-            sizeFiles += item
-        }
-    }
-    const totalSize = sizeSubDirs + sizeFiles
-    if (totalSize <= maxSize) {
-        sizeSubDirsLessThanMaxSize += totalSize
-    }
-    return [totalSize, sizeSubDirsLessThanMaxSize]
-}
-
-export function partOne(input: string): number {
+function parseInput(input: string): Stat {
     let jsonStr = input.replaceAll(/[ \t]+$/gm, '')
         .split('\n')
         .filter(line => Boolean(line.length) && line.match(/^(?:\$ cd |[0-9]+ )/))
@@ -43,7 +23,38 @@ export function partOne(input: string): number {
         jsonStr += ']'
     }
 
-    const array = JSON.parse(jsonStr)
+    return JSON.parse(jsonStr)
+}
 
-    return calculateSize(array)[1]
+function recurse(stats: Stat, cb?: (total: number) => void): number {
+    let total = 0
+    for (const stat of stats) {
+        if (Array.isArray(stat)) {
+            total += recurse(stat, cb)
+        } else {
+            total += stat
+        }
+    }
+    if (cb) {
+        cb(total)
+    }
+    return total
+}
+
+export function partOne(input: string): number {
+    let result = 0
+    recurse(parseInput(input), size => {
+        if (size <= 100000) {
+            result += size
+        }
+    })
+    return result
+}
+
+export function partTwo(input: string): number {
+    const available = 70000000, required = 30000000
+    const totals: number[] = []
+    const used = recurse(parseInput(input), size => totals.push(size))
+    const minSize = required - (available - used)
+    return totals.filter(n => n >= minSize).sort((a, b) => a - b)[0]
 }
