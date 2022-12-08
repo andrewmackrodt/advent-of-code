@@ -11,41 +11,76 @@ enum Direction {
     Left = 'left',
 }
 
-export function partOne(input: string): number {
-    const grid = parse(input)
+function getVisibleCount(grid: number[][], x: number, y: number, inwards: boolean, direction: Direction): number {
     const w = grid[0].length
     const h = grid.length
-    let count = (2 * (w - 2)) + (2 * h)
+    let hasNext: () => boolean
+    let ax = x, ay = y, count = 0
 
-    const isVisible = (x: number, y: number, direction: Direction): boolean => {
-        let hasNext: () => boolean
-        let ax = x, ay = y
-
-        if (direction === Direction.Top) hasNext = () => --ay >= 0
-        else if (direction === Direction.Right) hasNext = () => ++ax < w
-        else if (direction === Direction.Bottom) hasNext = () => ++ay < h
-        else if (direction === Direction.Left) hasNext = () => --ax >= 0
-        else throw new Error(`Invalid direction: ${direction}`)
-
-        while (hasNext()) {
-            if (grid[y][x] <= grid[ay][ax]) {
-                return false
-            }
-        }
-
-        return true
+    if (inwards) {
+        count++
     }
 
-    for (let y = 1, yLen = h - 1; y < yLen; y++)
-    for (let x = 1, xLen = w - 1; x < xLen; x++) {
-        if (isVisible(x, y, Direction.Top) ||
-            isVisible(x, y, Direction.Right) ||
-            isVisible(x, y, Direction.Bottom) ||
-            isVisible(x, y, Direction.Left)
+    if (direction === Direction.Top) hasNext = () => --ay >= 0
+    else if (direction === Direction.Right) hasNext = () => ++ax < w
+    else if (direction === Direction.Bottom) hasNext = () => ++ay < h
+    else if (direction === Direction.Left) hasNext = () => --ax >= 0
+    else throw new Error(`Invalid direction: ${direction}`)
+
+    while (hasNext()) {
+        if (grid[y][x] <= grid[ay][ax]) {
+            return inwards ? 0 : count + 1
+        }
+        count++
+    }
+
+    return inwards ? count + 1 : count
+}
+
+function recurseGrid(input: string, allowEdges: boolean, cb: (grid: number[][], x: number, y: number) => void) {
+    const grid = parse(input)
+    let minY = 0, maxY = grid.length
+    let minX = 0, maxX = grid[0].length
+
+    if ( ! allowEdges) {
+        minY++, maxY--
+        minX++, maxX--
+    }
+
+    for (let y = minY ; y < maxY; y++)
+    for (let x = minX ; x < maxX; x++) {
+        cb(grid, x, y)
+    }
+}
+
+export function partOne(input: string): number {
+    let count = 0
+    recurseGrid(input, true, (grid, x, y) => {
+        if (getVisibleCount(grid, x, y, true, Direction.Top) ||
+            getVisibleCount(grid, x, y, true, Direction.Right) ||
+            getVisibleCount(grid, x, y, true, Direction.Bottom) ||
+            getVisibleCount(grid, x, y, true, Direction.Left)
         ) {
             count++
         }
-    }
-
+    })
     return count
+}
+
+export function partTwo(input: string): number {
+    let maxScore = -1
+    recurseGrid(input, false, (grid, x, y) => {
+        const score = [
+            getVisibleCount(grid, x, y, false, Direction.Top),
+            getVisibleCount(grid, x, y, false, Direction.Right),
+            getVisibleCount(grid, x, y, false, Direction.Bottom),
+            getVisibleCount(grid, x, y, false, Direction.Left),
+        ]
+            .filter(count => Boolean(count))
+            .reduce((total, count) => total * count, 1)
+        if (score > maxScore) {
+            maxScore = score
+        }
+    })
+    return maxScore
 }
