@@ -1,7 +1,4 @@
-import * as timers from 'timers'
-
 type Direction = 'U' | 'R' | 'D' | 'L'
-interface Coord { x: number; y: number }
 
 function parseInput(input: string): [Direction, number][] {
     return input.replaceAll(/[ \t]+$/gm, '')
@@ -10,69 +7,41 @@ function parseInput(input: string): [Direction, number][] {
         .map(line => ([line[0], parseInt(line.slice(1), 10)] as [Direction, number]))
 }
 
-function doStep(direction: Direction, coord: Coord): Coord {
-    const newCoord = Object.assign({}, coord)
-    switch (direction) {
-        case 'U':
-            newCoord.y++
-            return newCoord
-        case 'R':
-            newCoord.x++
-            return newCoord
-        case 'D':
-            newCoord.y--
-            return newCoord
-        case 'L':
-            newCoord.x--
-            return newCoord
-        default:
-            throw new Error(`Invalid direction: ${direction}`)
-    }
-}
+export function solve(input: string, knotCount: number): number {
+    const steps = parseInput(input)
+    const knots = new Array(knotCount).fill(null).map(() => ({ x: 0, y: 0 }))
+    const tailHistory = new Set([`${knots[0].x},${knots[0].y}`])
 
-export function partOne(input: string): number {
-    const moves = parseInput(input)
-    let head: Coord = { x: 0, y: 0 }
-    let tail: Coord = { x: 0, y: 0 }
-    const tailHistory: Coord[] = [tail]
+    for (const [direction, stepCount] of Object.values(steps)) {
+        for (let i = 0; i < stepCount; i++) {
+            const head = knots[knots.length - 1]
 
-    for (const [direction, count] of Object.values(moves)) {
-        for (let i = 0; i < count; i++) {
-            head = doStep(direction, head)
-            let newTail = tail
-
-            if (['L', 'R'].includes(direction)) {
-                if ( ! (Math.abs(head.x - tail.x) > 1)) {
-                    continue
-                }
-
-                newTail = doStep(direction, newTail)
-
-                if (head.y !== tail.y) {
-                    if (head.y > tail.y) newTail.y++
-                    else newTail.y--
-                }
+            switch (direction) {
+                case 'U': head.y++; break
+                case 'R': head.x++; break
+                case 'D': head.y--; break
+                case 'L': head.x--; break
+                default: throw new Error(`Invalid direction: ${direction}`)
             }
-            else {
-                if ( ! (Math.abs(head.y - tail.y) > 1)) {
-                    continue
-                }
 
-                newTail = doStep(direction, newTail)
+            for (let k = knots.length - 2; k >= 0; k--) {
+                const parent = knots[k + 1]
+                const knot = knots[k]
+                const x = parent.x - knot.x, absX = Math.abs(x)
+                const y = parent.y - knot.y, absY = Math.abs(y)
 
-                if (head.x !== tail.x) {
-                    if (head.x > tail.x) newTail.x++
-                    else newTail.x--
+                if (absX > 1 || absY > 1) {
+                    if (x !== 0) { knot.x += x / absX }
+                    if (y !== 0) { knot.y += y / absY }
                 }
             }
 
-            tail = newTail
-            tailHistory.push(tail)
+            tailHistory.add(`${knots[0].x},${knots[0].y}`)
         }
     }
 
-    return Object.keys(Object.values(tailHistory).reduce((res, coord) => {
-        res[`${coord.x},${coord.y}`] = true
-        return res
-    }, {} as Record<string, true>)).length
+    return tailHistory.size
 }
+
+export const partOne = (input: string) => solve(input, 2)
+export const partTwo = (input: string) => solve(input, 10)
