@@ -1,3 +1,5 @@
+import { asciiToText } from '../../utils/ascii.js'
+
 type Instruction = ['noop'] | ['addx', number]
 
 function parseInput(input: string): Instruction[] {
@@ -27,4 +29,19 @@ export function partOne(input: string): number {
         }
     }
     return strength
+}
+
+export function partTwo(input: string): string {
+    const w = 40, h = 6
+    const display: ('.' | '#')[] = new Array(w * h).fill('.')
+    let cycle = 0, x = 0
+    for (const [instruction, value] of parseInput(input)) {
+        for (let i = 0, len = instruction === 'noop' ? 1 : 2; i < len; i++, cycle++) {
+            if (x <= (cycle % 40) && (cycle % 40) <= x + 2) {
+                display[cycle] = '#'
+            }
+        }
+        x += value ?? 0
+    }
+    return asciiToText(display)
 }
