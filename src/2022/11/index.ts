@@ -1,11 +1,7 @@
 interface Monkey {
     items: number[]
     operation: (item: number) => number
-    test: {
-        expr: (item: number) => boolean
-        true: number
-        false: number
-    }
+    test: { value: number; true: number; false: number }
 }
 
 const monkeyRegExp = new RegExp(/^Monkey ([0-9]+):$/)
@@ -29,11 +25,7 @@ function parseInput(input: string): Monkey[] {
                     behaviour = {
                         items: [],
                         operation: (item: number) => item,
-                        test: {
-                            expr: (item: number) => false,
-                            true: -1,
-                            false: -1,
-                        },
+                        test: { value: -1, true: -1, false: -1 },
                     }
                     behaviours[parseInt(match![1], 10)] = behaviour
                     break
@@ -56,7 +48,7 @@ function parseInput(input: string): Monkey[] {
                     }
                     break
                 case (match = testRegExp.exec(line)) !== null:
-                    behaviour.test.expr = (item: number) => item % parseInt(match![1], 10) === 0
+                    behaviour.test.value = parseInt(match![1], 10)
                     break
                 case (match = ifTrueRegExp.exec(line)) !== null:
                     behaviour.test.true = parseInt(match![1], 10)
@@ -72,18 +64,19 @@ function parseInput(input: string): Monkey[] {
     return behaviours
 }
 
-export function partOne(input: string): number {
+export function solve(input: string, rounds: number, useMod: boolean) {
     const behaviours = parseInput(input)
     const counts = new Array(behaviours.length).fill(0)
-    for (let round = 0; round < 20; round++) {
+    const mod = behaviours.reduce((a, b) => a * b.test.value, 1)
+    for (let round = 0; round < rounds; round++) {
         for (const monkey in behaviours) {
             const behaviour = behaviours[monkey]
             while (behaviour.items.length > 0) {
                 let worry = behaviour.items.shift()!
                 worry = behaviour.operation(worry)
-                worry = Math.floor(worry / 3)
+                worry = useMod ? worry % mod : Math.floor(worry / 3)
                 counts[monkey]++
-                const nextMonkey = behaviour.test.expr(worry)
+                const nextMonkey = worry % behaviour.test.value === 0
                     ? behaviour.test.true
                     : behaviour.test.false
                 behaviours[nextMonkey].items.push(worry)
@@ -92,3 +85,6 @@ export function partOne(input: string): number {
     }
     return counts.sort((a, b) => b - a).slice(0, 2).reduce((total, v) => total * v, 1)
 }
+
+export const partOne = (input: string) => solve(input, 20, false)
+export const partTwo = (input: string) => solve(input, 10000, true)

@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 describe('solve', () => {
     const input = `Monkey 0:
@@ -31,5 +31,9 @@ Monkey 3:
 
     it('returns part one answer', () => {
         expect(partOne(input)).toEqual(10605)
+    })
+
+    it('returns part one answer', () => {
+        expect(partTwo(input)).toEqual(2713310158)
     })
 })
