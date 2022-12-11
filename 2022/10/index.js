@@ -1,3 +1,4 @@
+import { asciiToText } from '../../utils/ascii.js';
 function parseInput(input) {
     return input.trim().replaceAll(/[ \t]+$/gm, '').split('\n')
         .filter(line => Boolean(line.length))
@@ -38,5 +39,5 @@ export function partTwo(input) {
         }
         x += value ?? 0;
     }
-    return display.join('').replaceAll(/(.{40})/g, '$1\n').replace(/\n$/, '');
+    return asciiToText(display);
 }

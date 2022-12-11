@@ -1,3 +1,4 @@
+import { asciiToText } from '../../utils/ascii.js';
 function parseInput(input) {
     const points = [];
     const folds = [];
@@ -63,7 +64,8 @@ export function getVisibleDotCount(input, foldLimit) {
     return parseState(input, foldLimit).reduce((total, row) => (total + row.reduce((rowTotal, cell) => rowTotal + Math.min(cell, 1), 0)), 0);
 }
 export function getCode(input) {
-    return parseState(input).map(y => y.map(v => v ? '#' : ' ').join('')).join('\n');
+    const ascii = parseState(input).map(y => y.map(v => v ? '#' : ' '));
+    return asciiToText(ascii);
 }
 export const partOne = (input) => getVisibleDotCount(input, 1);
 export const partTwo = (input) => getCode(input);
