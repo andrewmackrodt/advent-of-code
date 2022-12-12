@@ -30,15 +30,29 @@ function parseInput(input: string): Hill {
     return { start, end, grid }
 }
 
-function solve(input: string): number {
+function solve(input: string, startAnyA: boolean): number {
     const { start, end, grid } = parseInput(input)
     const height = grid.length
     const width  = grid[0]?.length ?? 0
     const steps: Record<string, number> = {}
-    steps[start] = 0
+
+    if (startAnyA) {
+        const aCharCode = 'a'.charCodeAt(0)
+        for (let y = 0; y < height; y++)
+        for (let x = 0; x < width; x++) {
+            if (grid[y][x] === aCharCode) {
+                steps[`${x},${y}`] = 0
+            }
+        }
+    } else {
+        steps[start] = 0
+    }
 
     const queue = new PriorityQueue<[string, number]>((a, b) => a[1] < b[1])
-    queue.push([start, 0])
+
+    for (const start of Object.keys(steps)) {
+        queue.push([start, 0])
+    }
 
     const visited = new Set()
 
@@ -77,4 +91,5 @@ function solve(input: string): number {
     return steps[end]
 }
 
-export const partOne = (input: string) => solve(input)
+export const partOne = (input: string) => solve(input, false)
+export const partTwo = (input: string) => solve(input, true)

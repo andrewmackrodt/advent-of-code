@@ -52,3 +52,40 @@ This path reaches the goal in <code><b>31</b></code> steps, the fewest possible.
 
 <b>What is the fewest steps required to move from your current position to the location that should
 get the best signal?</b>
+
+### --- Part Two ---
+
+As you walk up the hill, you suspect that the Elves will want to turn this into a hiking trail. The
+beginning isn't very scenic, though; perhaps you can find a better starting point.
+
+To maximize exercise while hiking, the trail should start as low as possible: elevation
+<code>a</code>. The goal is still the square marked <code>E</code>. However, the trail should still
+be direct, taking the fewest steps to reach its goal. So, you'll need to find the shortest path from
+<b>any square at elevation <code>a</code></b> to the square marked <code>E</code>.
+
+Again consider the example from above:
+
+<pre>
+<b>S</b>abqponm
+abcryxxl
+accsz<b>E</b>xk
+acctuvwj
+abdefghi
+</pre>
+
+Now, there are six choices for starting position (five marked <code>a</code>, plus the square marked
+<code>S</code> that counts as being at elevation <code>a</code>). If you start at the bottom-left
+square, you can reach the goal most quickly:
+
+<pre>
+...v&lt;&lt;&lt;&lt;
+...vv&lt;&lt;^
+...v&gt;E^^
+.&gt;v&gt;&gt;&gt;^^
+&gt;^&gt;&gt;&gt;&gt;&gt;^
+</pre>
+
+This path reaches the goal in only <code><b>29</b></code> steps, the fewest possible.
+
+<b>What is the fewest steps required to move starting from any square with elevation <code>a</code>
+to the location that should get the best signal?</b>
