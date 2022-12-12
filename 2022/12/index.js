@@ -1,16 +1,17 @@
 import { PriorityQueue } from '../../utils/PriorityQueue.js';
 function parseInput(input) {
-    const grid = { start: { x: 0, y: 0 }, end: { x: 0, y: 0 }, grid: [] };
+    const grid = [];
+    let start = null, end = null;
     input.split('\n').forEach((line, y) => {
         const row = [];
         line.split('').forEach((c, x) => {
             let n;
             if (c === 'S') {
-                grid.start = { x, y };
+                start = `${x},${y}`;
                 n = 'a'.charCodeAt(0);
             }
             else if (c === 'E') {
-                grid.end = { x, y };
+                end = `${x},${y}`;
                 n = 'z'.charCodeAt(0);
             }
             else {
@@ -18,15 +19,16 @@ function parseInput(input) {
             }
             row.push(n);
         });
-        grid.grid.push(row);
+        grid.push(row);
     });
-    return grid;
+    if (!start || !end)
+        throw new Error('Input error could not parse start or end position');
+    return { start, end, grid };
 }
 function solve(input, startAnyA) {
-    const { start: startVector, end: endVector, grid } = parseInput(input);
+    const { start, end, grid } = parseInput(input);
     const height = grid.length;
-    const width = grid[0].length;
-    const end = `${endVector.x},${endVector.y}`;
+    const width = grid[0]?.length ?? 0;
     const steps = {};
     if (startAnyA) {
         const aCharCode = 'a'.charCodeAt(0);
@@ -38,7 +40,7 @@ function solve(input, startAnyA) {
             }
     }
     else {
-        steps[`${startVector.x},${startVector.y}`] = 0;
+        steps[start] = 0;
     }
     const queue = new PriorityQueue((a, b) => a[1] < b[1]);
     for (const start of Object.keys(steps)) {
@@ -52,14 +54,16 @@ function solve(input, startAnyA) {
         visited.add(current);
         const [x, y] = current.split(',').map(s => parseInt(s, 10));
         const adjacent = [];
-        if (y > 0)
-            adjacent.push([x, y - 1]);
-        if (x < width - 1)
-            adjacent.push([x + 1, y]);
-        if (y < height - 1)
-            adjacent.push([x, y + 1]);
-        if (x > 0)
-            adjacent.push([x - 1, y]);
+        if (current !== end) {
+            if (y > 0)
+                adjacent.push([x, y - 1]);
+            if (x < width - 1)
+                adjacent.push([x + 1, y]);
+            if (y < height - 1)
+                adjacent.push([x, y + 1]);
+            if (x > 0)
+                adjacent.push([x - 1, y]);
+        }
         for (const [ax, ay] of adjacent) {
             // skip if elevation of the destination square is more than one higher than the current square
             if (grid[ay][ax] > grid[y][x] + 1) {
