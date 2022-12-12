@@ -472,7 +472,7 @@
             script = script.replaceAll(/^import (.+) from '([^']+)'/gm, "const $1 = await __importScript('$2')")
             script = script.replaceAll(/__importScript\\('\\./g, \`__importScript('\${baseUrl}/.\`)
             const exports = []
-            for (const e of script.matchAll(/^export (?:const|function) ([A-Za-z0-9_]+)/gm)) {
+            for (const e of script.matchAll(/^export (?:class|const|function) ([A-Za-z0-9_]+)/gm)) {
                 exports.push(e[1])
             }
             script = script.replaceAll(/^export /gm, '')
