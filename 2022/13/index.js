@@ -28,7 +28,7 @@ function parseInput(input) {
         .split('\n\n')
         .map(group => group.split('\n')
         .filter(line => line.match(/^[0-9,\[\]]+$/))
-        .map(line => eval(line)));
+        .map(line => JSON.parse(line)));
 }
 export function partOne(input) {
     return parseInput(input).reduce((total, [a, b], i) => packetSort(a, b) === -1 ? total + (i + 1) : total, 0);
