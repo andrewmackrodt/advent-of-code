@@ -18,10 +18,10 @@ function parseInput(input) {
     });
     return { points, folds };
 }
-function createState(points) {
+function createState(points, folds) {
     const state = [];
-    for (let width = 1 + points.reduce((res, p) => Math.max(res, p.x), 0), height = 1 + points.reduce((res, p) => Math.max(res, p.y), 0), y = 0; y < height; y++) {
-        state.push(new Array(width).fill(0));
+    for (let w = 1 + 2 * folds.filter(f => f.axis === 'x').reduce((max, f) => Math.max(max, f.value), 0), h = 1 + 2 * folds.filter(f => f.axis === 'y').reduce((max, f) => Math.max(max, f.value), 0), y = 0; y < h; y++) {
+        state.push(new Array(w).fill(0));
     }
     for (const point of points) {
         state[point.y][point.x] = 1;
@@ -56,7 +56,7 @@ function fold(state, folds) {
 }
 function parseState(input, foldLimit) {
     const { points, folds } = parseInput(input);
-    const state = createState(points);
+    const state = createState(points, folds);
     fold(state, folds.slice(0, foldLimit));
     return state;
 }
