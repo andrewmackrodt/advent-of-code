@@ -1,52 +1,43 @@
-function isCorrectOrder(a, b) {
+function packetSort(a, b) {
     for (let i = 0, len = Math.max(a.length, b.length); i < len; i++) {
         if (a.length <= i)
-            return true;
+            return -1;
         if (b.length <= i)
-            return false;
+            return 1;
         const av = a[i];
         const bv = b[i];
         if (typeof av === 'number' && typeof bv === 'number') {
             if (av !== bv) {
-                return av < bv;
+                return av < bv ? -1 : 1;
             }
         }
         else {
             const aa = Array.isArray(av) ? av : [av];
             const ba = Array.isArray(bv) ? bv : [bv];
-            const res = isCorrectOrder(aa, ba);
-            if (typeof res !== 'undefined') {
+            const res = packetSort(aa, ba);
+            if (res !== 0) {
                 return res;
             }
         }
     }
+    return 0;
 }
-export function partOne(input) {
-    const data = input.replace(/^\n+|\n+$/, '')
+function parseInput(input) {
+    return input.replace(/^\n+|\n+$/, '')
         .replaceAll(/\n{3,}/g, '\n\n')
         .split('\n\n')
         .map(group => group.split('\n')
         .filter(line => line.match(/^[0-9,\[\]]+$/))
         .map(line => eval(line)));
-    const indicies = [];
-    for (let i = 0, len = data.length; i < len; i++) {
-        const [a, b] = data[i];
-        if (isCorrectOrder(a, b)) {
-            indicies.push(i + 1);
-        }
-    }
-    return indicies.reduce((total, i) => total + i, 0);
+}
+export function partOne(input) {
+    return parseInput(input).reduce((total, [a, b], i) => packetSort(a, b) === -1 ? total + (i + 1) : total, 0);
 }
 export function partTwo(input) {
-    const data = input.replace(/^\n+|\n+$/, '')
-        .replaceAll(/\n{2,}/g, '\n')
-        .split('\n')
-        .filter(line => line.match(/^[0-9,\[\]]+$/))
-        .map(line => eval(line));
-    data.push([[2]]);
-    data.push([[6]]);
-    data.sort((a, b) => isCorrectOrder(a, b) ? -1 : 1);
-    const ia = 1 + data.findIndex(p => p.length === 1 && Array.isArray(p[0]) && p[0][0] === 2);
-    const ib = 1 + data.findIndex(p => p.length === 1 && Array.isArray(p[0]) && p[0][0] === 6);
-    return ia * ib;
+    const data = parseInput(input).flat();
+    let d1, d2;
+    data.push(d1 = [[2]]);
+    data.push(d2 = [[6]]);
+    data.sort(packetSort);
+    return (1 + data.indexOf(d1)) * (1 + data.indexOf(d2));
 }
