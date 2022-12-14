@@ -56,7 +56,7 @@ comes from <code>2,2 -&gt; 2,1</code>; the very bottom row is formed by the over
 
 To avoid the most dangerous areas, you need to determine <b>the number of points where at least two
 lines overlap</b>. In the above example, this is anywhere in the diagram with a <code>2</code> or
-larger - a total of <b><code>5</code></b> points.
+larger - a total of <code><b>5</b></code> points.
 
 Consider only horizontal and vertical lines. <b>At how many points do at least two lines
 overlap?</b>
@@ -91,6 +91,6 @@ Considering all lines from the above example would now produce the following dia
 
 You still need to determine <b>the number of points where at least two lines overlap</b>. In the
 above example, this is still anywhere in the diagram with a <code>2</code> or larger - now a total
-of <b><code>12</code></b> points.
+of <code><b>12</b></code> points.
 
 Consider all of the lines. <b>At how many points do at least two lines overlap?</b>

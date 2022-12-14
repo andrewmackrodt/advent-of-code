@@ -37,7 +37,7 @@ them as follows:
   <code>15</code>.
 
 After following these instructions, you would have a horizontal position of <code>15</code> and a
-depth of <code>10</code>. (Multiplying these together produces <b><code>150</code></b>.)
+depth of <code>10</code>. (Multiplying these together produces <code><b>150</b></code>.)
 
 Calculate the horizontal position and depth you would have after following the planned course.
 <b>What do you get if you multiply your final horizontal position by your final depth?</b>
@@ -74,7 +74,7 @@ Now, the above example does something different:
   to a total of <code>60</code>.
 
 After following these new instructions, you would have a horizontal position of <code>15</code> and
-a depth of <code>60</code>. (Multiplying these produces <b><code>900</code></b>.)
+a depth of <code>60</code>. (Multiplying these produces <code><b>900</b></code>.)
 
 Using this new interpretation of the commands, calculate the horizontal position and depth you would
 have after following the planned course. <b>What do you get if you multiply your final horizontal

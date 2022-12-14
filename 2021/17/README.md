@@ -139,7 +139,7 @@ well do it with <b>style</b>. How high can you make the probe go while still rea
 area?
 
 In the above example, using an initial velocity of <code>6,9</code> is the best you can do, causing
-the probe to reach a maximum <code>y</code> position of <b><code>45</code></b>. (Any higher initial
+the probe to reach a maximum <code>y</code> position of <code><b>45</b></code>. (Any higher initial
 <code>y</code> velocity causes the probe to overshoot the target area entirely.)
 
 Find the initial velocity that causes the probe to reach the highest <code>y</code> position and
@@ -154,7 +154,7 @@ not miss.
 To get the best idea of what your options are for launching the probe, you need to find <b>every
 initial velocity</b> that causes the probe to eventually be within the target area after any step.
 
-In the above example, there are <b><code>112</code></b> different initial velocity values that meet
+In the above example, there are <code><b>112</b></code> different initial velocity values that meet
 these criteria:
 
 <pre>

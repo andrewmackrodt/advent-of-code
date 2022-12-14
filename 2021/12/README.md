@@ -40,7 +40,7 @@ but big caves are large enough that it might be worth visiting them multiple tim
 you find should <b>visit small caves at most once</b>, and can <b>visit big caves any number of
 times</b>.
 
-Given these rules, there are <b><code>10</code></b> paths through this example cave system:
+Given these rules, there are <code><b>10</b></code> paths through this example cave system:
 
 <pre>
 start,A,b,A,c,A,end

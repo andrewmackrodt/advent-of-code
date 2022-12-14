@@ -247,7 +247,7 @@ Monkey 2 inspected items 7 times.
 
 In this example, the two most active monkeys inspected items 101 and 105 times. The level of
 <b>monkey business</b> in this situation can be found by multiplying these together:
-<b><code>10605</code></b>.
+<code><b>10605</b></code>.
 
 Figure out which monkeys to chase by counting how many items they inspect over 20 rounds. <b>What is
 the level of monkey business after 20 rounds of stuff-slinging simian shenanigans?</b>
@@ -343,7 +343,7 @@ Monkey 2 inspected items 1938 times.
 
 After 10000 rounds, the two most active monkeys inspected items 52166 and 52013 times. Multiplying
 these together, the level of <b>monkey business</b> in this situation is now
-<b><code>2713310158</code></b>.
+<code><b>2713310158</b></code>.
 
 Worry levels are no longer divided by three after each item is inspected; you'll need to find
 another way to keep your worry levels manageable. Starting again from the initial state in your

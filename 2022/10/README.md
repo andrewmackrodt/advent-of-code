@@ -211,17 +211,17 @@ The interesting signal strengths can be determined as follows:
   of the other <code>addx</code> values up to that point: 1 + 15 - 11 + 6 - 3 + 5 - 1 - 8 + 13 + 4 =
   21.)
 - During the 60th cycle, register <code>X</code> has the value <code>19</code>, so the signal
-  strength is 60 * 19 = <b><code>1140</code></b>.
+  strength is 60 * 19 = <code><b>1140</b></code>.
 - During the 100th cycle, register <code>X</code> has the value <code>18</code>, so the signal
-  strength is 100 * 18 = <b><code>1800</code></b>.
+  strength is 100 * 18 = <code><b>1800</b></code>.
 - During the 140th cycle, register <code>X</code> has the value <code>21</code>, so the signal
-  strength is 140 * 21 = <b><code>2940</code></b>.
+  strength is 140 * 21 = <code><b>2940</b></code>.
 - During the 180th cycle, register <code>X</code> has the value <code>16</code>, so the signal
-  strength is 180 * 16 = <b><code>2880</code></b>.
+  strength is 180 * 16 = <code><b>2880</b></code>.
 - During the 220th cycle, register <code>X</code> has the value <code>18</code>, so the signal
-  strength is 220 * 18 = <b><code>3960</code></b>.
+  strength is 220 * 18 = <code><b>3960</b></code>.
 
-The sum of these signal strengths is <b><code>13140</code></b>.
+The sum of these signal strengths is <code><b>13140</b></code>.
 
 Find the signal strength during the 20th, 60th, 100th, 140th, 180th, and 220th cycles. <b>What is
 the sum of these six signal strengths?</b>

@@ -11,9 +11,10 @@ As you begin to make your way deeper underground, you feel the ground rumble for
 begins pouring into the cave! If you don't quickly figure out where the sand is going, you could
 quickly become trapped!
 
-Fortunately, your [familiarity](/2018/day/17) with analyzing the path of falling material will come
-in handy here. You scan a two-dimensional vertical slice of the cave above you (your puzzle input)
-and discover that it is mostly <b>air</b> with structures made of <b>rock</b>.
+Fortunately, your [familiarity](https://adventofcode.com/2018/day/17) with analyzing the path of
+falling material will come in handy here. You scan a two-dimensional vertical slice of the cave
+above you (your puzzle input) and discover that it is mostly <b>air</b> with structures made of
+<b>rock</b>.
 
 Your scan traces the path of each solid rock structure and reports the <code>x,y</code> coordinates
 that form the shape of the path, where <code>x</code> represents distance to the right and
@@ -142,7 +143,7 @@ Finally, only two more units of sand can possibly come to rest:
 #########.
 </pre>
 
-Once all <b><code>24</code></b> units of sand shown above have come to rest, all further sand flows
+Once all <code><b>24</b></code> units of sand shown above have come to rest, all further sand flows
 out the bottom, falling into the endless void. Just for fun, the path any new sand takes before
 falling forever is shown here with <code>~</code>:
 
@@ -196,7 +197,7 @@ this:
 
 To find somewhere safe to stand, you'll need to simulate falling sand until a unit of sand comes to
 rest at <code>500,0</code>, blocking the source entirely and stopping the flow of sand into the
-cave. In the example above, the situation finally looks like this after <b><code>93</code></b> units
+cave. In the example above, the situation finally looks like this after <code><b>93</b></code> units
 of sand come to rest:
 
 <pre>

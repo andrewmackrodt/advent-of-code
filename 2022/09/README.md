@@ -272,7 +272,7 @@ visited) and <code>#</code> marks other positions the tail visited:
 s###..
 </pre>
 
-So, there are <b><code>13</code></b> positions the tail visited at least once.
+So, there are <code><b>13</b></code> positions the tail visited at least once.
 
 Simulate your complete hypothetical series of motions. <b>How many positions does the tail of the
 rope visit at least once?</b>
@@ -463,7 +463,7 @@ H123..  (2 covers 4)
 </pre>
 
 Now, you need to keep track of the positions the new tail, <code>9</code>, visits. In this example,
-the tail never moves, and so it only visits <b><code>1</code></b> position. However, <b>be
+the tail never moves, and so it only visits <code><b>1</b></code> position. However, <b>be
 careful</b>: more types of motion are possible than before, so you might want to visually compare
 your simulated rope to the one above.
 
@@ -701,7 +701,7 @@ H.........................
 
 </pre>
 
-Now, the tail (<code>9</code>) visits <b><code>36</code></b> positions (including <code>s</code>) at
+Now, the tail (<code>9</code>) visits <code><b>36</b></code> positions (including <code>s</code>) at
 least once:
 
 <pre>

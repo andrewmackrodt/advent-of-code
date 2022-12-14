@@ -111,7 +111,7 @@ The total sizes of the directories above can be found as follows:
 
 To begin, find all of the directories with a total size of <b>at most 100000</b>, then calculate the
 sum of their total sizes. In the example above, these directories are <code>a</code> and
-<code>e</code>; the sum of their total sizes is <b><code>95437</code></b> (94853 + 584). (As in this
+<code>e</code>; the sum of their total sizes is <code><b>95437</b></code> (94853 + 584). (As in this
 example, this process can count files more than once!)
 
 Find all of the directories with a total size of at most 100000. <b>What is the sum of the total
@@ -121,8 +121,8 @@ sizes of those directories?</b>
 
 Now, you're ready to choose a directory to delete.
 
-The total disk space available to the filesystem is <b><code>70000000</code></b>. To run the update,
-you need unused space of at least <b><code>30000000</code></b>. You need to find a directory you can
+The total disk space available to the filesystem is <code><b>70000000</b></code>. To run the update,
+you need unused space of at least <code><b>30000000</b></code>. You need to find a directory you can
 delete that will <b>free up enough space</b> to run the update.
 
 In the example above, the total size of the outermost directory (and thus the total amount of used
@@ -141,7 +141,7 @@ To achieve this, you have the following options:
 Directories <code>e</code> and <code>a</code> are both too small; deleting them would not free up
 enough space. However, directories <code>d</code> and <code>/</code> are both big enough! Between
 these, choose the <b>smallest</b>: <code>d</code>, increasing unused space by
-<b><code>24933642</code></b>.
+<code><b>24933642</b></code>.
 
 Find the smallest directory that, if deleted, would free up enough space on the filesystem to run
 the update. <b>What is the total size of that directory?</b>

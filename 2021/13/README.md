@@ -140,7 +140,7 @@ Because this is a vertical line, fold <b>left</b>:
 The instructions made a square!
 
 The transparent paper is pretty big, so for now, focus on just completing the first fold. After the
-first fold in the example above, <b><code>17</code></b> dots are visible - dots that end up
+first fold in the example above, <code><b>17</b></code> dots are visible - dots that end up
 overlapping after the fold is completed count as a single dot.
 
 <b>How many dots are visible after completing just the first fold instruction on your transparent

@@ -57,7 +57,7 @@ Some of the pairs have noticed that one of their assignments <b>fully contains</
 example, <code>2-8</code> fully contains <code>3-7</code>, and <code>6-6</code> is fully contained
 by <code>4-6</code>. In pairs where one assignment fully contains the other, one Elf in the pair
 would be exclusively cleaning sections their partner will already be cleaning, so these seem like
-the most in need of reconsideration. In this example, there are <b><code>2</code></b> such pairs.
+the most in need of reconsideration. In this example, there are <code><b>2</b></code> such pairs.
 
 <b>In how many assignment pairs does one range fully contain the other?</b>
 
@@ -75,6 +75,6 @@ overlap, while the remaining four pairs (<code>5-7,7-9</code>, <code>2-8,3-7</co
 - <code>6-6,4-6</code> overlaps in a single section, <code>6</code>.
 - <code>2-6,4-8</code> overlaps in sections <code>4</code>, <code>5</code>, and <code>6</code>.
 
-So, in this example, the number of overlapping assignment pairs is <b><code>4</code></b>.
+So, in this example, the number of overlapping assignment pairs is <code><b>4</b></code>.
 
 <b>In how many assignment pairs do the ranges overlap?</b>

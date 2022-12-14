@@ -73,9 +73,9 @@ syntax errors in a file? It's true! To calculate the syntax error score for a li
 - <code>&gt;</code>: <code>25137</code> points.
 
 In the above example, an illegal <code>)</code> was found twice (<code>2*3 = <b>6</b></code>
-points), an illegal <code>]</code> was found once (<b><code>57</code></b> points), an illegal
-<code>}</code> was found once (<b><code>1197</code></b> points), and an illegal <code>&gt;</code>
-was found once (<b><code>25137</code></b> points). So, the total syntax error score for this file is
+points), an illegal <code>]</code> was found once (<code><b>57</b></code> points), an illegal
+<code>}</code> was found once (<code><b>1197</b></code> points), and an illegal <code>&gt;</code>
+was found once (<code><b>25137</b></code> points). So, the total syntax error score for this file is
 <code>6+57+1197+25137 = <b>26397</b></code> points!
 
 Find the first illegal character in each corrupted line of the navigation subsystem. <b>What is the
@@ -136,7 +136,7 @@ The five lines' completion strings have total scores as follows:
 
 Autocomplete tools are an odd bunch: the winner is found by <b>sorting</b> all of the scores and
 then taking the <b>middle</b> score. (There will always be an odd number of scores to consider.) In
-this example, the middle score is <b><code>288957</code></b> because there are the same number of
+this example, the middle score is <code><b>288957</b></code> because there are the same number of
 scores smaller and larger than it.
 
 Find the completion string for each incomplete line, score the completion strings, and sort the

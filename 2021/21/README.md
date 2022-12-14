@@ -86,10 +86,10 @@ die always splits the universe into <b>three copies</b>: one where the outcome o
 <code>1</code>, one where it was <code>2</code>, and one where it was <code>3</code>.
 
 The game is played the same as before, although to prevent things from getting too far out of hand,
-the game now ends when either player's score reaches at least <b><code>21</code></b>.
+the game now ends when either player's score reaches at least <code><b>21</b></code>.
 
 Using the same starting positions as in the example above, player 1 wins in
-<b><code>444356092776315</code></b> universes, while player 2 merely wins in
+<code><b>444356092776315</b></code> universes, while player 2 merely wins in
 <code>341960390180808</code> universes.
 
 Using your given starting positions, determine every possible outcome. <b>Find the player that wins

@@ -137,16 +137,16 @@ Here are a few more examples of hexadecimal-encoded transmissions:
 
 - <code>8A004A801A8002F478</code> represents an operator packet (version 4) which contains an
   operator packet (version 1) which contains an operator packet (version 5) which contains a literal
-  value (version 6); this packet has a version sum of <b><code>16</code></b>.
+  value (version 6); this packet has a version sum of <code><b>16</b></code>.
 - <code>620080001611562C8802118E34</code> represents an operator packet (version 3) which contains
   two sub-packets; each sub-packet is an operator packet that contains two literal values. This
-  packet has a version sum of <b><code>12</code></b>.
+  packet has a version sum of <code><b>12</b></code>.
 - <code>C0015000016115A2E0802F182340</code> has the same structure as the previous example, but the
   outermost packet uses a different length type ID. This packet has a version sum of
-  <b><code>23</code></b>.
+  <code><b>23</b></code>.
 - <code>A0016C880162017C3686B18A3D4780</code> is an operator packet that contains an operator packet
   that contains an operator packet that contains five literal values; it has a version sum of
-  <b><code>31</code></b>.
+  <code><b>31</b></code>.
 
 Decode the structure of your hexadecimal-encoded BITS transmission; <b>what do you get if you add up
 the version numbers in all packets?</b>
@@ -184,13 +184,13 @@ Using these rules, you can now work out the value of the outermost packet in you
 For example:
 
 - <code>C200B40A82</code> finds the sum of <code>1</code> and <code>2</code>, resulting in the value
-  <b><code>3</code></b>.
+  <code><b>3</b></code>.
 - <code>04005AC33890</code> finds the product of <code>6</code> and <code>9</code>, resulting in the
-  value <b><code>54</code></b>.
+  value <code><b>54</b></code>.
 - <code>880086C3E88112</code> finds the minimum of <code>7</code>, <code>8</code>, and
-  <code>9</code>, resulting in the value <b><code>7</code></b>.
+  <code>9</code>, resulting in the value <code><b>7</b></code>.
 - <code>CE00C43D881120</code> finds the maximum of <code>7</code>, <code>8</code>, and
-  <code>9</code>, resulting in the value <b><code>9</code></b>.
+  <code>9</code>, resulting in the value <code><b>9</b></code>.
 - <code>D8005AC2A8F0</code> produces <code>1</code>, because <code>5</code> is less than
   <code>15</code>.
 - <code>F600BC2D8F</code> produces <code>0</code>, because <code>5</code> is not greater than

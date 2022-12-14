@@ -78,7 +78,7 @@ Finally, one crate is moved from stack 1 to stack 2:
 
 The Elves just need to know <b>which crate will end up on top of each stack</b>; in this example,
 the top crates are <code>C</code> in stack 1, <code>M</code> in stack 2, and <code>Z</code> in stack
-3, so you should combine these together and give the Elves the message <b><code>CMZ</code></b>.
+3, so you should combine these together and give the Elves the message <code><b>CMZ</b></code>.
 
 <b>After the rearrangement procedure completes, what crate ends up on top of each stack?</b>
 
@@ -144,7 +144,7 @@ that gets moved:
 </pre>
 
 In this example, the CrateMover 9001 has put the crates in a totally different order:
-<b><code>MCD</code></b>.
+<code><b>MCD</b></code>.
 
 Before the rearrangement process finishes, update your simulation so that the Elves know where they
 should stand to be ready to unload the final supplies. <b>After the rearrangement procedure

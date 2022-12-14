@@ -1,9 +1,9 @@
 ### --- Day 1: Calorie Counting ---
 
 Santa's reindeer typically eat regular reindeer food, but they need a lot of [magical
-energy](/2018/day/25) to deliver presents on Christmas. For that, their favorite snack is a special
-type of <b>star</b> fruit that only grows deep in the jungle. The Elves have brought you on their
-annual expedition to the grove where the fruit grows.
+energy](https://adventofcode.com/2018/day/25) to deliver presents on Christmas. For that, their
+favorite snack is a special type of <b>star</b> fruit that only grows deep in the jungle. The Elves
+have brought you on their annual expedition to the grove where the fruit grows.
 
 To supply enough magical energy, the expedition needs to retrieve a minimum of <b>fifty stars</b> by
 December 25th. Although the Elves assure you that the grove has plenty of fruit, you decide to grab
@@ -45,13 +45,13 @@ list:
 This list represents the Calories of the food carried by five Elves:
 
 - The first Elf is carrying food with <code>1000</code>, <code>2000</code>, and <code>3000</code>
-  Calories, a total of <b><code>6000</code></b> Calories.
-- The second Elf is carrying one food item with <b><code>4000</code></b> Calories.
+  Calories, a total of <code><b>6000</b></code> Calories.
+- The second Elf is carrying one food item with <code><b>4000</b></code> Calories.
 - The third Elf is carrying food with <code>5000</code> and <code>6000</code> Calories, a total of
-  <b><code>11000</code></b> Calories.
+  <code><b>11000</b></code> Calories.
 - The fourth Elf is carrying food with <code>7000</code>, <code>8000</code>, and <code>9000</code>
-  Calories, a total of <b><code>24000</code></b> Calories.
-- The fifth Elf is carrying one food item with <b><code>10000</code></b> Calories.
+  Calories, a total of <code><b>24000</b></code> Calories.
+- The fifth Elf is carrying one food item with <code><b>10000</b></code> Calories.
 
 In case the Elves get hungry and need extra snacks, they need to know which Elf to ask: they'd like
 to know how many Calories are being carried by the Elf carrying the <b>most</b> Calories. In the
@@ -70,7 +70,7 @@ Elves runs out of snacks, they still have two backups.
 
 In the example above, the top three Elves are the fourth Elf (with <code>24000</code> Calories),
 then the third Elf (with <code>11000</code> Calories), then the fifth Elf (with <code>10000</codE>
-Calories). The sum of the Calories carried by these three elves is <b><code>45000</code></b>.
+Calories). The sum of the Calories carried by these three elves is <code><b>45000</b></code>.
 
 Find the top three Elves carrying the most Calories. <b>How many Calories are those Elves carrying
 in total?</b>

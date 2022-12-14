@@ -105,7 +105,7 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |
 Because the digits <code>1</code>, <code>4</code>, <code>7</code>, and <code>8</code> each use a
 unique number of segments, you should be able to tell which combinations of signals correspond to
 those digits. Counting <b>only digits in the output values</b> (the part after <code>|</code> on
-each line), in the above example, there are <b><code>26</code></b> instances of digits that use a
+each line), in the above example, there are <code><b>26</b></code> instances of digits that use a
 unique number of segments (highlighted above).
 
 <b>In the output values, how many times do digits <code>1</code>, <code>4</code>, <code>7</code>, or
@@ -148,12 +148,12 @@ So, the unique signal patterns would correspond to the following digits:
 
 Then, the four digits of the output value can be decoded:
 
-- <code>cdfeb</code>: <b><code>5</code></b>
-- <code>fcadb</code>: <b><code>3</code></b>
-- <code>cdfeb</code>: <b><code>5</code></b>
-- <code>cdbaf</code>: <b><code>3</code></b>
+- <code>cdfeb</code>: <code><b>5</b></code>
+- <code>fcadb</code>: <code><b>3</b></code>
+- <code>cdfeb</code>: <code><b>5</b></code>
+- <code>cdbaf</code>: <code><b>3</b></code>
 
-Therefore, the output value for this entry is <b><code>5353</code></b>.
+Therefore, the output value for this entry is <code><b>5353</b></code>.
 
 Following this same process for each entry in the second, larger example above, the output value of
 each entry can be determined:
@@ -169,7 +169,7 @@ each entry can be determined:
 - <code>gbdfcae bgc cg cgb</code>: <code>8717</code>
 - <code>fgae cfgab fg bagce</code>: <code>4315</code>
 
-Adding all of the output values in this larger example produces <b><code>61229</code></b>.
+Adding all of the output values in this larger example produces <code><b>61229</b></code>.
 
 For each entry, determine all of the wire/segment connections and decode the four-digit output
 values. <b>What do you get if you add up all of the output values?</b>

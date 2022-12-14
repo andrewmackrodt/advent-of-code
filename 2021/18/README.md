@@ -184,13 +184,13 @@ recursive: the magnitude of <code>[[9,1],[1,9]]</code> is <code>3*29 + 2*21 = <b
 
 Here are a few more magnitude examples:
 
-- <code>[[1,2],[[3,4],5]]</code> becomes <b><code>143</code></b>.
-- <code>[[[[0,7],4],[[7,8],[6,0]]],[8,1]]</code> becomes <b><code>1384</code></b>.
-- <code>[[[[1,1],[2,2]],[3,3]],[4,4]]</code> becomes <b><code>445</code></b>.
-- <code>[[[[3,0],[5,3]],[4,4]],[5,5]]</code> becomes <b><code>791</code></b>.
-- <code>[[[[5,0],[7,4]],[5,5]],[6,6]]</code> becomes <b><code>1137</code></b>.
+- <code>[[1,2],[[3,4],5]]</code> becomes <code><b>143</b></code>.
+- <code>[[[[0,7],4],[[7,8],[6,0]]],[8,1]]</code> becomes <code><b>1384</b></code>.
+- <code>[[[[1,1],[2,2]],[3,3]],[4,4]]</code> becomes <code><b>445</b></code>.
+- <code>[[[[3,0],[5,3]],[4,4]],[5,5]]</code> becomes <code><b>791</b></code>.
+- <code>[[[[5,0],[7,4]],[5,5]],[6,6]]</code> becomes <code><b>1137</b></code>.
 - <code>[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]</code> becomes
-  <b><code>3488</code></b>.
+  <code><b>3488</b></code>.
 
 So, given this example homework assignment:
 
@@ -212,7 +212,7 @@ The final sum is:
 <pre>
 [[[[6,6],[7,6]],[[7,7],[7,0]]],[[[7,7],[7,7]],[[7,8],[9,9]]]]</pre>
 
-The magnitude of this final sum is <b><code>4140</code></b>.
+The magnitude of this final sum is <code><b>4140</b></code>.
 
 Add up all of the snailfish numbers from the homework assignment in the order they appear. <b>What
 is the magnitude of the final sum?</b>
@@ -243,7 +243,7 @@ Again considering the last example homework assignment above:
 </pre>
 
 The largest magnitude of the sum of any two snailfish numbers in this list is
-<b><code>3993</code></b>. This is the magnitude of
+<code><b>3993</b></code>. This is the magnitude of
 <code>[[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]</code> +
 <code>[[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]</code>, which reduces to
 <code>[[[[7,8],[6,6]],[[6,0],[7,7]]],[[[7,8],[8,8]],[[7,9],[0,6]]]]</code>.

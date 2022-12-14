@@ -32,15 +32,15 @@ CrZsJsPPZsGzwwsLwLmpwMDw
 - The first rucksack contains the items <code>vJrwpWtwJgWrhcsFMMfFFhFp</code>, which means its first
   compartment contains the items <code>vJrwpWtwJgWr</code>, while the second compartment contains
   the items <code>hcsFMMfFFhFp</code>. The only item type that appears in both compartments is
-  lowercase <b><code>p</code></b>.
+  lowercase <code><b>p</b></code>.
 - The second rucksack's compartments contain <code>jqHRNqRjqzjGDLGL</code> and
   <code>rsFMfFZSrLrFZsSL</code>. The only item type that appears in both compartments is uppercase
-  <b><code>L</code></b>.
+  <code><b>L</b></code>.
 - The third rucksack's compartments contain <code>PmmdzqPrV</code> and <code>vPwwTWBwg</code>; the
-  only common item type is uppercase <b><code>P</code></b>.
-- The fourth rucksack's compartments only share item type <b><code>v</code></b>.
-- The fifth rucksack's compartments only share item type <b><code>t</code></b>.
-- The sixth rucksack's compartments only share item type <b><code>s</code></b>.
+  only common item type is uppercase <code><b>P</b></code>.
+- The fourth rucksack's compartments only share item type <code><b>v</b></code>.
+- The fifth rucksack's compartments only share item type <code><b>t</b></code>.
+- The sixth rucksack's compartments only share item type <code><b>s</b></code>.
 
 To help prioritize item rearrangement, every item type can be converted to a <b>priority</b>:
 
@@ -49,7 +49,7 @@ To help prioritize item rearrangement, every item type can be converted to a <b>
 
 In the above example, the priority of the item type that appears in both compartments of each
 rucksack is 16 (<code>p</code>), 38 (<code>L</code>), 42 (<code>P</code>), 22 (<code>v</code>), 20
-(<code>t</code>), and 19 (<code>s</code>); the sum of these is <b><code>157</code></b>.
+(<code>t</code>), and 19 (<code>s</code>); the sum of these is <code><b>157</b></code>.
 
 Find the item type that appears in both compartments of each rucksack. <b>What is the sum of the
 priorities of those item types?</b>
@@ -94,7 +94,7 @@ In the first group, the only item type that appears in all three rucksacks is lo
 
 Priorities for these items must still be found to organize the sticker attachment efforts: here,
 they are 18 (<code>r</code>) for the first group and 52 (<code>Z</code>) for the second group. The
-sum of these is <b><code>70</code></b>.
+sum of these is <code><b>70</b></code>.
 
 Find the item type that corresponds to the badges of each three-Elf group. <b>What is the sum of the
 priorities of those item types?</b>

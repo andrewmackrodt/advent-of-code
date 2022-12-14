@@ -77,7 +77,7 @@ Finally, <code>24</code> is drawn:
 </pre>
 
 At this point, the third board <b>wins</b> because it has at least one complete row or column of
-marked numbers (in this case, the entire top row is marked: <b><code>14 21 17 24  4</code></b>).
+marked numbers (in this case, the entire top row is marked: <code><b>14 21 17 24  4</b></code>).
 
 The <b>score</b> of the winning board can now be calculated. Start by finding the <b>sum of all
 unmarked numbers</b> on that board; in this case, the sum is <code>188</code>. Then, multiply that

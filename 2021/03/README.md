@@ -40,12 +40,12 @@ bit of the gamma rate is <code>0</code>.
 The most common value of the third, fourth, and fifth bits are <code>1</code>, <code>1</code>, and
 <code>0</code>, respectively, and so the final three bits of the gamma rate are <code>110</code>.
 
-So, the gamma rate is the binary number <code>10110</code>, or <b><code>22</code></b> in decimal.
+So, the gamma rate is the binary number <code>10110</code>, or <code><b>22</b></code> in decimal.
 
 The epsilon rate is calculated in a similar way; rather than use the most common bit, the least
 common bit from each position is used. So, the epsilon rate is <code>01001</code>, or
-<b><code>9</code></b> in decimal. Multiplying the gamma rate (<code>22</code>) by the epsilon rate
-(<code>9</code>) produces the power consumption, <b><code>198</code></b>.
+<code><b>9</b></code> in decimal. Multiplying the gamma rate (<code>22</code>) by the epsilon rate
+(<code>9</code>) produces the power consumption, <code><b>198</b></code>.
 
 Use the binary numbers in your diagnostic report to calculate the gamma rate and epsilon rate, then
 multiply them together. <b>What is the power consumption of the submarine?</b> (Be sure to represent
@@ -71,11 +71,11 @@ The <b>bit criteria</b> depends on which type of rating value you want to find:
 
 - To find <b>oxygen generator rating</b>, determine the <b>most common</b> value (<code>0</code> or
   <code>1</code>) in the current bit position, and keep only numbers with that bit in that position.
-  If <code>0</code> and <code>1</code> are equally common, keep values with a <b><code>1</code></b>
+  If <code>0</code> and <code>1</code> are equally common, keep values with a <code><b>1</b></code>
   in the position being considered.
 - To find <b>CO2 scrubber rating</b>, determine the <b>least common</b> value (<code>0</code> or
   <code>1</code>) in the current bit position, and keep only numbers with that bit in that position.
-  If <code>0</code> and <code>1</code> are equally common, keep values with a <b><code>0</code></b>
+  If <code>0</code> and <code>1</code> are equally common, keep values with a <code><b>0</b></code>
   in the position being considered.
 
 For example, to determine the <b>oxygen generator rating</b> value using the same example diagnostic
@@ -96,7 +96,7 @@ report from above:
   (one each). So, to find the <b>oxygen generator rating</b>, keep the number with a <code>1</code>
   in that position: <code>10111</code>.
 - As there is only one number left, stop; the <b>oxygen generator rating</b> is <code>10111</code>,
-  or <b><code>23</code></b> in decimal.
+  or <code><b>23</b></code> in decimal.
 
 Then, to determine the <b>CO2 scrubber rating</b> value from the same example above:
 
@@ -111,10 +111,10 @@ Then, to determine the <b>CO2 scrubber rating</b> value from the same example ab
   (one each). So, to find the <b>CO2 scrubber rating</b>, keep the number with a <code>0</code> in
   that position: <code>01010</code>.
 - As there is only one number left, stop; the <b>CO2 scrubber rating</b> is <code>01010</code>, or
-  <b><code>10</code></b> in decimal.
+  <code><b>10</b></code> in decimal.
 
 Finally, to find the life support rating, multiply the oxygen generator rating (<code>23</code>) by
-the CO2 scrubber rating (<code>10</code>) to get <b><code>230</code></b>.
+the CO2 scrubber rating (<code>10</code>) to get <code><b>230</b></code>.
 
 Use the binary numbers in your diagnostic report to calculate the oxygen generator rating and CO2
 scrubber rating, then multiply them together. <b>What is the life support rating of the

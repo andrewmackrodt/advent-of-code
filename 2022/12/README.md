@@ -48,7 +48,7 @@ In the above diagram, the symbols indicate whether the path exits each square mo
 location that should get the best signal is still <code>E</code>, and <code>.</code> marks unvisited
 squares.
 
-This path reaches the goal in <b><code>31</code></b> steps, the fewest possible.
+This path reaches the goal in <code><b>31</b></code> steps, the fewest possible.
 
 <b>What is the fewest steps required to move from your current position to the location that should
 get the best signal?</b>
@@ -85,7 +85,7 @@ square, you can reach the goal most quickly:
 &gt;^&gt;&gt;&gt;&gt;&gt;^
 </pre>
 
-This path reaches the goal in only <b><code>29</code></b> steps, the fewest possible.
+This path reaches the goal in only <code><b>29</b></code> steps, the fewest possible.
 
 <b>What is the fewest steps required to move starting from any square with elevation <code>a</code>
 to the location that should get the best signal?</b>

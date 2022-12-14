@@ -45,7 +45,7 @@ This strategy guide predicts and recommends the following:
   <b>6</b>.
 
 In this example, if you were to follow the strategy guide, you would get a total score of
-<b><code>15</code></b> (8 + 1 + 6).
+<code><b>15</b></code> (8 + 1 + 6).
 
 <b>What would your total score be if everything goes exactly according to your strategy guide?</b>
 
@@ -66,7 +66,7 @@ choose so the round ends as indicated. The example above now goes like this:
   <b>7</b>.
 
 Now that you're correctly decrypting the ultra top secret strategy guide, you would get a total
-score of <b><code>12</code></b>.
+score of <code><b>12</b></code>.
 
 Following the Elf's instructions for the second column, <b>what would your total score be if
 everything goes exactly according to your strategy guide?</b>

@@ -6,7 +6,7 @@ rebooted.
 The reactor core is made up of a large 3-dimensional grid made up entirely of cubes, one cube per
 integer 3-dimensional coordinate (<code>x,y,z</code>). Each cube can be either <b>on</b> or
 <b>off</b>; at the start of the reboot process, they are all <b>off</b>. (Could it be an old model
-of a reactor you've seen [before](/2020/day/17)?)
+of a reactor you've seen [before](https://adventofcode.com/2020/day/17)?)
 
 To reboot the reactor, you just need to set all of the cubes to either <b>on</b> or <b>off</b> by
 following a list of <b>reboot steps</b> (your puzzle input). Each step specifies a
@@ -91,7 +91,7 @@ overlaps partially with some cubes that are on, ultimately turning off 8 cubes:
 - <code>11,11,11</code>
 
 The final step (<code>on x=10..10,y=10..10,z=10..10</code>) turns <b>on</b> a single cube,
-<code>10,10,10</code>. After this last step, <b><code>39</code></b> cubes are <b>on</b>.
+<code>10,10,10</code>. After this last step, <code><b>39</b></code> cubes are <b>on</b>.
 
 The initialization procedure only uses cubes that have <code>x</code>, <code>y</code>, and
 <code>z</code> positions of at least <code>-50</code> and at most <code>50</code>. For now, ignore
@@ -126,7 +126,7 @@ on x=967..23432,y=45373..81175,z=27513..53682
 
 The last two steps are fully outside the initialization procedure area; all other steps are fully
 within it. After executing these steps in the initialization procedure region,
-<b><code>590784</code></b> cubes are <b>on</b>.
+<code><b>590784</b></code> cubes are <b>on</b>.
 
 Execute the reboot steps. Afterward, considering only cubes in the region
 <code>x=-50..50,y=-50..50,z=-50..50</code>, <b>how many cubes are on?</b>
@@ -202,7 +202,7 @@ on x=-53470..21291,y=-120233..-33476,z=-44150..38147
 off x=-93533..-4276,y=-16170..68771,z=-104985..-24507
 </pre>
 
-After running the above reboot steps, <b><code>2758514936282235</code></b> cubes are <b>on</b>.
+After running the above reboot steps, <code><b>2758514936282235</b></code> cubes are <b>on</b>.
 (Just for fun, <code>474140</code> of those are also in the initialization procedure region.)
 
 Starting again with all cubes <b>off</b>, execute all reboot steps. Afterward, considering all

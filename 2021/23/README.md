@@ -57,7 +57,7 @@ However, because they are timid and stubborn, the amphipods have some extra rule
   a room</b>. (That is, once any amphipod starts moving, any other amphipods currently in the
   hallway are locked in place and will not move again until they can move fully into a room.)
 
-In the above example, the amphipods can be organized using a minimum of <b><code>12521</code></b>
+In the above example, the amphipods can be organized using a minimum of <code><b>12521</b></code>
 energy. One way to do this is shown below.
 
 Starting configuration:
@@ -182,7 +182,7 @@ The amphipods still want to be organized into rooms similar to before:
 </pre>
 
 In this updated example, the least energy required to organize these amphipods is
-<b><code>44169</code></b>:
+<code><b>44169</b></code>:
 
 <pre>
 #############

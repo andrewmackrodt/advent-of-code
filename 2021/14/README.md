@@ -43,11 +43,11 @@ So, starting with the polymer template <code>NNCB</code>, the first step simulta
 all three pairs:
 
 - The first pair (<code>NN</code>) matches the rule <code>NN -&gt; C</code>, so element
-  <b><code>C</code></b> is inserted between the first <code>N</code> and the second <code>N</code>.
+  <code><b>C</b></code> is inserted between the first <code>N</code> and the second <code>N</code>.
 - The second pair (<code>NC</code>) matches the rule <code>NC -&gt; B</code>, so element
-  <b><code>B</code></b> is inserted between the <code>N</code> and the <code>C</code>.
+  <code><b>B</b></code> is inserted between the <code>N</code> and the <code>C</code>.
 - The third pair (<code>CB</code>) matches the rule <code>CB -&gt; H</code>, so element
-  <b><code>H</code></b> is inserted between the <code>C</code> and the <code>B</code>.
+  <code><b>H</b></code> is inserted between the <code>C</code> and the <code>B</code>.
 
 Note that these pairs overlap: the second element of one pair is the first element of the next pair.
 Also, because all pairs are considered simultaneously, inserted elements are not considered to be
@@ -82,7 +82,7 @@ steps of the pair insertion process; a total of <b>40 steps</b> should do it.
 
 In the above example, the most common element is <code>B</code> (occurring
 <code>2192039569602</code> times) and the least common element is <code>H</code> (occurring
-<code>3849876073</code> times); subtracting these produces <b><code>2188189693529</code></b>.
+<code>3849876073</code> times); subtracting these produces <code><b>2188189693529</b></code>.
 
 Apply <b>40</b> steps of pair insertion to the polymer template and find the most and least common
 elements in the result. <b>What do you get if you take the quantity of the most common element and

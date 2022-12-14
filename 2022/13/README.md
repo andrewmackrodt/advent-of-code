@@ -131,7 +131,7 @@ Using these rules, you can determine which of the pairs in the example are in th
 
 What are the indices of the pairs that are already <b>in the right order</b>? (The first pair has
 index 1, the second pair has index 2, and so on.) In the above example, the pairs in the right order
-are 1, 2, 4, and 6; the sum of these indices is <b><code>13</code></b>.
+are 1, 2, 4, and 6; the sum of these indices is <code><b>13</b></code>.
 
 Determine which pairs of packets are already in the right order. <b>What is the sum of the indices
 of those pairs?</b>
@@ -177,7 +177,7 @@ For the example above, the result of putting the packets in the correct order is
 Afterward, locate the divider packets. To find the <b>decoder key</b> for this distress signal, you
 need to determine the indices of the two divider packets and multiply them together. (The first
 packet is at index 1, the second packet is at index 2, and so on.) In this example, the divider
-packets are <b>10th</b> and <b>14th</b>, and so the decoder key is <b><code>140</code></b>.
+packets are <b>10th</b> and <b>14th</b>, and so the decoder key is <code><b>140</b></code>.
 
 Organize all of the packets into the correct order. <b>What is the decoder key for the distress
 signal?</b>

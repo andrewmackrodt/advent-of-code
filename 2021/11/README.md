@@ -319,7 +319,7 @@ After step 100:
 6789998766
 </pre>
 
-After 100 steps, there have been a total of <b><code>1656</code></b> flashes.
+After 100 steps, there have been a total of <code><b>1656</b></code> flashes.
 
 Given the starting energy levels of the dumbo octopuses in your cavern, simulate 100 steps. <b>How
 many total flashes are there after 100 steps?</b>
@@ -330,7 +330,7 @@ It seems like the individual flashes aren't bright enough to navigate. However, 
 better option: the flashes seem to be <b>synchronizing</b>!
 
 In the example above, the first time all octopuses flash simultaneously is step
-<b><code>195</code></b>:
+<code><b>195</b></code>:
 
 <pre>
 After step 193:

@@ -43,7 +43,7 @@ lowest total risk is highlighted here:
 231194458<b>1</b>
 </pre>
 
-The total risk of this path is <b><code>40</code></b> (the starting position is never entered, so
+The total risk of this path is <code><b>40</b></code> (the starting position is never entered, so
 its risk is not counted).
 
 <b>What is the lowest total risk of any path from the top left to the bottom right?</b>
@@ -184,7 +184,7 @@ corner with the lowest total risk:
 675548893578665991468977611257918872236812998<b>33479</b>
 </pre>
 
-The total risk of this path is <b><code>315</code></b> (the starting position is still never
+The total risk of this path is <code><b>315</b></code> (the starting position is still never
 entered, so its risk is not counted).
 
 Using the full map, <b>what is the lowest total risk of any path from the top left to the bottom

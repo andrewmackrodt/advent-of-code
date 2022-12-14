@@ -44,7 +44,7 @@ trees</b> to consider:
   <code>4</code> are not.
 
 With 16 trees visible on the edge and another 5 visible in the interior, a total of
-<b><code>21</code></b> trees are visible in this arrangement.
+<code><b>21</b></code> trees are visible in this arrangement.
 
 Consider your map; <b>how many trees are visible from outside the grid?</b>
 
@@ -71,16 +71,16 @@ In the example above, consider the middle <code>5</code> in the second row:
 35390
 </pre>
 
-- Looking up, its view is not blocked; it can see <b><code>1</code></b> tree (of height
+- Looking up, its view is not blocked; it can see <code><b>1</b></code> tree (of height
   <code>3</code>).
-- Looking left, its view is blocked immediately; it can see only <b><code>1</code></b> tree (of
+- Looking left, its view is blocked immediately; it can see only <code><b>1</b></code> tree (of
   height <code>5</code>, right next to it).
-- Looking right, its view is not blocked; it can see <b><code>2</code></b> trees.
-- Looking down, its view is blocked eventually; it can see <b><code>2</code></b> trees (one of
+- Looking right, its view is not blocked; it can see <code><b>2</b></code> trees.
+- Looking down, its view is blocked eventually; it can see <code><b>2</b></code> trees (one of
   height <code>3</code>, then the tree of height <code>5</code> that blocks its view).
 
 A tree's <b>scenic score</b> is found by <b>multiplying together</b> its viewing distance in each of
-the four directions. For this tree, this is <b><code>4</code></b> (found by multiplying <code>1 * 1
+the four directions. For this tree, this is <code><b>4</b></code> (found by multiplying <code>1 * 1
 * 2 * 2</code>).
 
 However, you can do even better: consider the tree of height <code>5</code> in the middle of the
@@ -94,14 +94,14 @@ fourth row:
 35390
 </pre>
 
-- Looking up, its view is blocked at <b><code>2</code></b> trees (by another tree with a height of
+- Looking up, its view is blocked at <code><b>2</b></code> trees (by another tree with a height of
   <code>5</code>).
-- Looking left, its view is not blocked; it can see <b><code>2</code></b> trees.
-- Looking down, its view is also not blocked; it can see <b><code>1</code></b> tree.
-- Looking right, its view is blocked at <b><code>2</code></b> trees (by a massive tree of height
+- Looking left, its view is not blocked; it can see <code><b>2</b></code> trees.
+- Looking down, its view is also not blocked; it can see <code><b>1</b></code> tree.
+- Looking right, its view is blocked at <code><b>2</b></code> trees (by a massive tree of height
   <code>9</code>).
 
-This tree's scenic score is <b><code>8</code></b> (<code>2 * 2 * 1 * 2</code>); this is the ideal
+This tree's scenic score is <code><b>8</b></code> (<code>2 * 2 * 1 * 2</code>); this is the ideal
 spot for the tree house.
 
 Consider each tree on your map. <b>What is the highest scenic score possible for any tree?</b>

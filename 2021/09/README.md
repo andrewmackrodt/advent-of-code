@@ -33,7 +33,7 @@ location, and so are not low points.
 
 The <b>risk level</b> of a low point is <b>1 plus its height</b>. In the above example, the risk
 levels of the low points are <code>2</code>, <code>1</code>, <code>6</code>, and <code>6</code>. The
-sum of the risk levels of all low points in the heightmap is therefore <b><code>15</code></b>.
+sum of the risk levels of all low points in the heightmap is therefore <code><b>15</b></code>.
 
 Find all of the low points on your heightmap. <b>What is the sum of the risk levels of all low
 points on your heightmap?</b>

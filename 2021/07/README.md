@@ -40,7 +40,7 @@ position <code>2</code>:
 - Move from <code>2</code> to <code>2</code>: <code>0</code> fuel
 - Move from <code>14</code> to <code>2</code>: <code>12</code> fuel
 
-This costs a total of <b><code>37</code></b> fuel. This is the cheapest possible outcome; more
+This costs a total of <code><b>37</b></code> fuel. This is the cheapest possible outcome; more
 expensive outcomes include aligning at position <code>1</code> (<code>41</code> fuel), position
 <code>3</code> (<code>39</code> fuel), or position <code>10</code> (<code>71</code> fuel).
 
@@ -71,7 +71,7 @@ to align them all on; in the example above, this becomes <code>5</code>:
 - Move from <code>2</code> to <code>5</code>: <code>6</code> fuel
 - Move from <code>14</code> to <code>5</code>: <code>45</code> fuel
 
-This costs a total of <b><code>168</code></b> fuel. This is the new cheapest possible outcome; the
+This costs a total of <code><b>168</b></code> fuel. This is the new cheapest possible outcome; the
 old alignment position (<code>2</code>) now costs <code>206</code> fuel instead.
 
 Determine the horizontal position that the crabs can align to using the least fuel possible so they

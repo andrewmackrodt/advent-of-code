@@ -68,7 +68,7 @@ Each day, a <code>0</code> becomes a <code>6</code> and adds a new <code>8</code
 list, while each other number decreases by 1 if it was present at the start of the day.
 
 In this example, after 18 days, there are a total of <code>26</code> fish. After 80 days, there
-would be a total of <b><code>5934</code></b>.
+would be a total of <code><b>5934</b></code>.
 
 Find a way to simulate lanternfish. <b>How many lanternfish would there be after 80 days?</b>
 
@@ -77,7 +77,7 @@ Find a way to simulate lanternfish. <b>How many lanternfish would there be after
 Suppose the lanternfish live forever and have unlimited food and space. Would they take over the
 entire ocean?
 
-After 256 days in the example above, there would be a total of <b><code>26984457539</code></b>
+After 256 days in the example above, there would be a total of <code><b>26984457539</b></code>
 lanternfish!
 
 <b>How many lanternfish would there be after 256 days?</b>
