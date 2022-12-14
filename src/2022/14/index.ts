@@ -70,8 +70,17 @@ function parseInput(input: string): Cave {
     }
 }
 
-export function partOne(input: string): number {
+export function solve(input: string, hasBounds: boolean): number {
     const { tiles, hole } = parseInput(input)
+    if ( ! hasBounds) {
+        hole.x += tiles.length
+        tiles.forEach(row => {
+            row.unshift(...new Array(tiles.length).fill(Tile.Air))
+            row.push(...new Array(tiles.length).fill(Tile.Air))
+        })
+        tiles.push(new Array(tiles[0].length).fill(Tile.Air))
+        tiles.push(new Array(tiles[0].length).fill(Tile.Rock))
+    }
     let count = 0
     for (let prevCount = -1; prevCount !== count; prevCount++) {
         const sand: Point = Object.assign({}, hole)
@@ -105,7 +114,7 @@ export function partOne(input: string): number {
         if (tiles[sand.y][sand.x] === Tile.Air) {
             const isLastRow = sand.y === tiles.length - 1
             const isHorizontalEnd = sand.x === 0 || sand.x === tiles[sand.y].length - 1
-            const isFreeFall = isLastRow || isHorizontalEnd
+            const isFreeFall = hasBounds && (isLastRow || isHorizontalEnd)
             if ( ! isFreeFall) {
                 tiles[sand.y][sand.x] = Tile.Sand
                 count++
@@ -114,3 +123,6 @@ export function partOne(input: string): number {
     }
     return count
 }
+
+export const partOne = (input: string) => solve(input, true)
+export const partTwo = (input: string) => solve(input, false)
