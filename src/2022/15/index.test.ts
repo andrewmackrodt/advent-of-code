@@ -17,12 +17,12 @@ Sensor at x=20, y=1: closest beacon is at x=15, y=3`
 
 describe('partOne', () => {
     it('returns part one answer', () => {
-        expect(partOne(input, 10)).toEqual(26)
+        expect(partOne(input)).toEqual(26)
     })
 })
 
 describe('partTwo', () => {
     it('returns part two answer', () => {
-        expect(partTwo(input, 20)).toEqual(56000011)
+        expect(partTwo(input)).toEqual(56000011)
     })
 })
