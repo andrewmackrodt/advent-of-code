@@ -1,23 +1,22 @@
 const pointRegExp = new RegExp(/Sensor at x=(-?[0-9]+), ?y=(-?[0-9]+): closest beacon is at x=(-?[0-9]+), ?y=(-?[0-9]+)/i);
-function parseInput(input) {
-    const instruments = [];
+function getSensors(input) {
+    const sensors = [];
     for (const line of input.split('\n').filter(line => Boolean(line.length))) {
         const match = pointRegExp.exec(line);
         if (!match)
             throw new Error('Input Error');
-        const beacon = {
-            type: 'beacon',
-            x: parseInt(match[3], 10),
-            y: parseInt(match[4], 10),
-        };
-        instruments.push({
+        sensors.push({
             type: 'sensor',
             x: parseInt(match[1], 10),
             y: parseInt(match[2], 10),
-            closestBeacon: beacon,
-        }, beacon);
+            closestBeacon: {
+                type: 'beacon',
+                x: parseInt(match[3], 10),
+                y: parseInt(match[4], 10),
+            },
+        });
     }
-    return instruments;
+    return sensors.sort((a, b) => a.y - b.y);
 }
 function getManhattanDistance(a, b) {
     return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -62,16 +61,18 @@ function getUniqueIntersections(ranges) {
 function volume(range) {
     return 1 + Math.abs(range[1] - range[0]);
 }
-export function partOne(input, y = 2000000) {
-    const instruments = parseInput(input);
-    const sensors = instruments.filter(i => i.type === 'sensor');
+export function partOne(input, y) {
+    const sensors = getSensors(input);
+    if (!y)
+        y = sensors[sensors.length - 1].y < 1000 ? 10 : 2000000;
     const intersections = getXIntersectsAtY(sensors, y);
     const unique = getUniqueIntersections(intersections);
     return unique.reduce((total, range) => total + volume(range), 0);
 }
-export function partTwo(input, max = 4000000) {
-    const instruments = parseInput(input);
-    const sensors = instruments.filter(i => i.type === 'sensor').sort((a, b) => a.y - b.y);
+export function partTwo(input, max) {
+    const sensors = getSensors(input);
+    if (!max)
+        max = sensors[sensors.length - 1].y < 1000 ? 20 : 4000000;
     for (let y = 0; y < max; y++) {
         const intersections = getXIntersectsAtY(sensors, y, { includeClosestBeacon: true });
         const unique = getUniqueIntersections(intersections);
