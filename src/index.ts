@@ -6,15 +6,33 @@ const moduleExt = isTs ? 'ts' : 'js'
 const defaultYear = '2022'
 
 function printResult(part: number, cb: () => unknown) {
+    const startedAt = performance.now()
     let result = cb()
+    const elapsed = performance.now() - startedAt
+    let elapsedNum: number
+    let elapsedSym: string
+    switch (true) {
+        case elapsed < 1:
+            elapsedNum = Math.round(elapsed * 1000)
+            elapsedSym = 'μs'
+            break
+        case elapsed > 1000:
+            elapsedNum = Math.round(elapsed) / 1000
+            elapsedSym = 's'
+            break
+        default:
+            elapsedNum = Math.round(elapsed)
+            elapsedSym = 'ms'
+    }
+    const elapsedStr = `${elapsedNum} ${elapsedSym}`
     if (typeof result === 'string' && result.includes('\n')) {
         if (result.match(/^[#. \n]+$/)) {
             result = result.replaceAll(/[. ]/g, '  ').replaceAll(/#/g, '\x1b[38;5;252m\x1b[48;5;255m##\x1b[0m')
         }
-        console.log(`Part ${part}:`)
+        console.log(`Part ${part} [${elapsedStr}]:`)
         console.log(result)
     } else {
-        console.log(`Part ${part}:`, result)
+        console.log(`Part ${part} [${elapsedStr}]:`, result)
     }
 }
 
