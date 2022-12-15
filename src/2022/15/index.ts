@@ -45,7 +45,7 @@ function getManhattanDistance(a: Point, b: Point) {
     return Math.abs(a.x - b.x) + Math.abs(a.y - b.y)
 }
 
-function getNoBeaconXIntersectsAtY(sensors: Sensor[], y: number) {
+function getXIntersectsAtY(sensors: Sensor[], y: number, options?: { includeClosestBeacon: boolean }) {
     const intersections: Range[] = []
     for (const sensor of sensors) {
         const distance = getManhattanDistance(sensor, sensor.closestBeacon)
@@ -53,7 +53,7 @@ function getNoBeaconXIntersectsAtY(sensors: Sensor[], y: number) {
         if (delta >= 0) {
             let min = sensor.x - delta
             let max = sensor.x + delta
-            if (sensor.closestBeacon.y === y) {
+            if ( ! options?.includeClosestBeacon && sensor.closestBeacon.y === y) {
                 if (sensor.closestBeacon.x === min) min++
                 else if (sensor.closestBeacon.x === max) max--
             }
@@ -70,11 +70,11 @@ function getUniqueIntersections(ranges: Range[]): Range[] {
     unique.push(prev)
     for (let i = 1, len = sorted.length; i < len; i++) {
         const curr = sorted[i].concat() as Range
-        if (curr[0] <= prev[1]) {
-            curr[0] = prev[1] + 1
-            if (curr[1] < curr[0]) {
-                continue
+        if (curr[0] - 1 <= prev[1]) {
+            if (prev[1] < curr[1]) {
+                prev[1] = curr[1]
             }
+            continue
         }
         unique.push(curr)
         prev = curr
@@ -89,7 +89,27 @@ function volume(range: Range) {
 export function partOne(input: string, y = 2000000): number {
     const instruments = parseInput(input)
     const sensors = instruments.filter(i => i.type === 'sensor') as Sensor[]
-    const intersections = getNoBeaconXIntersectsAtY(sensors, y)
+    const intersections = getXIntersectsAtY(sensors, y)
     const unique = getUniqueIntersections(intersections)
     return unique.reduce((total, range) => total + volume(range), 0)
+}
+
+export function partTwo(input: string, max = 4000000): number {
+    const instruments = parseInput(input)
+    const sensors = instruments.filter(i => i.type === 'sensor').sort((a, b) => a.y - b.y) as Sensor[]
+    for (let y = 0; y < max; y++) {
+        const intersections = getXIntersectsAtY(sensors, y, { includeClosestBeacon: true })
+        const unique = getUniqueIntersections(intersections)
+        for (let i = 1, len = unique.length; i < len; i++) {
+            const prev = unique[i - 1][1]
+            const curr = unique[i][0]
+            if (curr - prev === 2) {
+                const x = prev + 1
+                if (0 <= x && x <= max) {
+                    return (x * 4000000) + y
+                }
+            }
+        }
+    }
+    return -1
 }
