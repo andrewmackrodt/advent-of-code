@@ -1,5 +1,53 @@
 import { PriorityQueue } from '../../utils/PriorityQueue.js';
 const valveRegExp = new RegExp(/\b([A-Z]{2})\b.*?\brate=([0-9]+)\b.*?\b([A-Z]{2}(?:, ?[A-Z]{2})*)$/);
+class MoveEvaluator {
+    constructor(valves) {
+        this.cache = {};
+        this.valves = valves;
+    }
+    evaluate(origin, destination, minutesLeft) {
+        // increase cost by one to account for opening the valve
+        const cost = 1 + this.getCost(origin, destination);
+        return {
+            balance: minutesLeft - cost,
+            benefit: destination.rate * Math.max(0, minutesLeft - cost),
+            cost,
+        };
+    }
+    getCost(origin, destination) {
+        if (origin.id === destination.id) {
+            return 0;
+        }
+        const key = `${origin.id}:${destination.id}`;
+        if (key in this.cache) {
+            return this.cache[key];
+        }
+        const queue = new PriorityQueue((a, b) => a < b);
+        queue.push([origin, 0]);
+        const visited = { [origin.id]: 0 };
+        for (const [node, cost] of queue) {
+            // skip the node if it has been visited cheaper
+            if (cost > (visited[node.id] ?? Number.MAX_SAFE_INTEGER)) {
+                continue;
+            }
+            visited[node.id] = cost;
+            if (cost > 0) {
+                this.cache[`${origin.id}:${node.id}`] = cost;
+            }
+            // break if the destination node is found
+            if (node.id === destination.id) {
+                break;
+            }
+            // add siblings to queue
+            for (const sibling of Object.values(node.siblings)) {
+                if (sibling.id !== node.id) {
+                    queue.push([sibling, cost + 1]);
+                }
+            }
+        }
+        return this.cache[key];
+    }
+}
 function parseInput(input) {
     const valves = {};
     const getOrCreateValve = (id) => {
@@ -22,99 +70,46 @@ function parseInput(input) {
     }
     return valves;
 }
-export function partOne(input) {
+function solve(input, minutes = 30) {
     const valves = parseInput(input);
-    const maxOpenCount = Object.values(valves).filter(valve => Boolean(valve.rate)).length;
-    const queue = new PriorityQueue((a, b) => a.minute < b.minute);
-    let highest = -1;
-    queue.push({
-        action: 'initial',
-        history: [],
-        minute: 0,
-        open: [],
-        position: 'AA',
-        ppm: 0,
-        total: 0,
-    });
+    const calculator = new MoveEvaluator(valves);
     const visited = {};
+    const queue = new PriorityQueue((a, b) => a.pressure > b.pressure);
+    queue.push({ closed: [], position: 'AA', pressure: 0, remaining: minutes });
+    let highest = -1;
     for (const state of queue) {
-        if (state.minute === 30) {
-            if (state.total > highest) {
-                highest = state.total;
+        if (state.pressure > highest) {
+            highest = state.pressure;
+        }
+        if (state.remaining === 0) {
+            continue;
+        }
+        const key = state.closed.join('|');
+        if (key in visited && state.pressure < visited[key]) {
+            continue;
+        }
+        visited[key] = state.pressure;
+        const start = valves[state.position];
+        const evaluations = Object.values(valves)
+            .filter(destination => (destination.id !== start.id &&
+            destination.rate > 0 &&
+            !state.closed.includes(destination.id)))
+            .reduce((evaluations, destination) => {
+            evaluations[destination.id] = calculator.evaluate(start, destination, state.remaining);
+            return evaluations;
+        }, {});
+        for (const [destinationId, evaluation] of Object.entries(evaluations)) {
+            if (evaluation.balance < 0) {
+                continue;
             }
-            continue;
-        }
-        const valve = valves[state.position];
-        let open = state.open;
-        let ppm = state.ppm;
-        let total = state.total + ppm;
-        if (state.action === 'open') {
-            ppm += valve.rate;
-            total += valve.rate;
-            open = open.concat(state.position).sort();
-        }
-        const nextState = {
-            action: 'wait',
-            history: state.history.concat(state),
-            minute: state.minute + 1,
-            open,
-            position: state.position,
-            ppm, total,
-        };
-        const key = `${nextState.minute}:${nextState.position}:[${nextState.open.join(',')}]`;
-        // skip path if we have visited the edge in the same minute previously and the same valves were open
-        if (key in visited && visited[key] >= nextState.total) {
-            continue;
-        }
-        visited[key] = nextState.total;
-        // if all valves are open calculate maximum value
-        if (nextState.open.length === maxOpenCount) {
-            const rem = 30 - nextState.minute;
-            const total = nextState.total + (rem * nextState.ppm);
-            if (total > highest) {
-                highest = total;
-            }
-            continue;
-        }
-        const nextStates = [];
-        // open valve at current position not already open and rate > 0
-        if (!(nextState.open.includes(state.position)) && valve.rate > 0) {
-            nextStates.push({
-                action: 'open',
-                history: nextState.history,
-                minute: nextState.minute,
-                open: nextState.open,
-                position: nextState.position,
-                ppm: nextState.ppm,
-                total: nextState.total,
+            queue.push({
+                closed: state.closed.concat(destinationId).sort(),
+                position: destinationId,
+                pressure: state.pressure + evaluation.benefit,
+                remaining: evaluation.balance,
             });
-        }
-        for (const sibling of Object.values(valve.siblings)) {
-            // don't traverse to previous valves if we've moved from them and not opened anything
-            let isVisited = false;
-            if (state.action === 'move') {
-                for (let i = state.history.length - 1; i >= 0 && state.history[i].action === 'move'; i--) {
-                    if (state.history[i].position === sibling.id) {
-                        isVisited = true;
-                        break;
-                    }
-                }
-            }
-            if (!isVisited) {
-                nextStates.push({
-                    action: 'move',
-                    history: nextState.history,
-                    minute: nextState.minute,
-                    open: nextState.open,
-                    position: sibling.id,
-                    ppm: nextState.ppm,
-                    total: nextState.total,
-                });
-            }
-        }
-        for (const nextState of nextStates) {
-            queue.push(nextState);
         }
     }
     return highest;
 }
+export const partOne = (input) => solve(input, 30);
