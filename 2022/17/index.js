@@ -74,7 +74,7 @@ function moveRock(chamber, rock, direction) {
     }
     return canMoveDown;
 }
-function solve(input, steps, patternRepeatThreshold = 20) {
+function solve(input, steps, patternRepeatThreshold = 1750) {
     const chamber = [];
     const directions = input.replaceAll(/[^<>]/g, '');
     const deltas = [];
@@ -99,20 +99,25 @@ function solve(input, steps, patternRepeatThreshold = 20) {
         const delta = chamber.length - lastHeight;
         deltas.push(delta);
         lastHeight = chamber.length;
-        const hash = deltas.slice(deltas.length - patternRepeatThreshold).join('|');
-        for (let repeatStep = deltas.length - 1 - (2 * patternRepeatThreshold); repeatStep >= 0; repeatStep--) {
-            const cmp = deltas.slice(repeatStep, repeatStep + patternRepeatThreshold).join('|');
-            if (hash !== cmp) {
-                continue;
+        if (step >= (2 * patternRepeatThreshold) - 1) {
+            const search = deltas.slice(0, deltas.length - patternRepeatThreshold).join('');
+            const hash = deltas.slice(deltas.length - patternRepeatThreshold).join('');
+            const repeatStep = search.lastIndexOf(hash);
+            if (repeatStep >= 0) {
+                const repeatLength = step - patternRepeatThreshold - repeatStep + 1;
+                if (repeatLength > patternRepeatThreshold) {
+                    console.warn(`Increasing pattern repeat threshold: ${repeatLength}`);
+                    patternRepeatThreshold = repeatLength;
+                    continue;
+                }
+                const repeatDeltas = deltas.slice(repeatStep, repeatStep + repeatLength);
+                const stepsLeft = steps - repeatStep;
+                const mul = Math.floor(stepsLeft / repeatLength);
+                const rem = stepsLeft % repeatLength;
+                return deltas.slice(0, repeatStep).reduce((total, delta) => total + delta, 0)
+                    + (mul * repeatDeltas.reduce((total, delta) => total + delta, 0))
+                    + repeatDeltas.slice(0, rem).reduce((total, delta) => total + delta, 0);
             }
-            const repeatLength = step - patternRepeatThreshold - repeatStep + 1;
-            const repeatDeltas = deltas.slice(repeatStep, repeatStep + repeatLength);
-            const stepsLeft = steps - repeatStep;
-            const mul = Math.floor(stepsLeft / repeatLength);
-            const rem = stepsLeft % repeatLength;
-            return deltas.slice(0, repeatStep).reduce((total, delta) => total + delta, 0)
-                + (mul * repeatDeltas.reduce((total, delta) => total + delta, 0))
-                + repeatDeltas.slice(0, rem).reduce((total, delta) => total + delta, 0);
         }
     }
     return chamber.length;
