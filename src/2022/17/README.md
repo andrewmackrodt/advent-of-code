@@ -364,3 +364,13 @@ after 2022 rocks have stopped (but before the 2023rd rock begins falling). In th
 tower of rocks will be <code><b>3068</b></code> units tall.
 
 <b>How many units tall will the tower of rocks be after 2022 rocks have stopped falling?</b>
+
+### --- Part Two ---
+
+The elephants are not impressed by your simulation. They demand to know how tall the tower will be
+after <code><b>1000000000000</b></code> rocks have stopped! Only then will they feel confident
+enough to proceed through the cave.
+
+In the example above, the tower would be <code><b>1514285714288</b></code> units tall!
+
+<b>How tall will the tower be after <code>1000000000000</code> rocks have stopped?</b>
