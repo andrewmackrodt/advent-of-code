@@ -70,36 +70,35 @@ function parseInput(input) {
     }
     return valves;
 }
-function solve(input, minutes = 30) {
+function getScores(input, minutes) {
     const valves = parseInput(input);
-    const calculator = new MoveEvaluator(valves);
-    const visited = {};
+    const evaluator = new MoveEvaluator(valves);
+    const scores = {};
     const queue = new PriorityQueue((a, b) => a.pressure > b.pressure);
     queue.push({ closed: [], position: 'AA', pressure: 0, remaining: minutes });
-    let highest = -1;
     for (const state of queue) {
-        if (state.pressure > highest) {
-            highest = state.pressure;
-        }
         if (state.remaining === 0) {
             continue;
         }
         const key = state.closed.join('|');
-        if (key in visited && state.pressure < visited[key]) {
+        if (key in scores && state.pressure < scores[key]) {
             continue;
         }
-        visited[key] = state.pressure;
+        scores[key] = state.pressure;
         const start = valves[state.position];
         const evaluations = Object.values(valves)
             .filter(destination => (destination.id !== start.id &&
             destination.rate > 0 &&
             !state.closed.includes(destination.id)))
             .reduce((evaluations, destination) => {
-            evaluations[destination.id] = calculator.evaluate(start, destination, state.remaining);
+            const evaluation = evaluator.evaluate(start, destination, state.remaining);
+            if (evaluation.benefit > 0) {
+                evaluations[destination.id] = evaluation;
+            }
             return evaluations;
         }, {});
         for (const [destinationId, evaluation] of Object.entries(evaluations)) {
-            if (evaluation.balance < 0) {
+            if (evaluation.benefit <= 0) {
                 continue;
             }
             queue.push({
@@ -110,6 +109,35 @@ function solve(input, minutes = 30) {
             });
         }
     }
+    delete scores[''];
+    return scores;
+}
+function solve(input, minutes, concurrency) {
+    const scores = Object.entries(getScores(input, minutes))
+        .reduce((res, [key, score]) => {
+        res.push({ score, key });
+        return res;
+    }, [])
+        .sort((a, b) => b.score - a.score);
+    let highest = 0;
+    for (let s1 = 0; s1 < scores.length; s1++) {
+        let key = '';
+        let score = 0;
+        for (let c = 0; c < concurrency; c++) {
+            for (let s2 = s1 + c; s2 < scores.length; s2++) {
+                const scoreKey = scores[s2];
+                if (!key || !scoreKey.key.match(key)) {
+                    key = key ? `${key}|${scoreKey.key}` : scoreKey.key;
+                    score += scoreKey.score;
+                    if (score > highest) {
+                        highest = score;
+                    }
+                    break;
+                }
+            }
+        }
+    }
     return highest;
 }
-export const partOne = (input) => solve(input, 30);
+export const partOne = (input) => solve(input, 30, 1);
+export const partTwo = (input) => solve(input, 26, 2);
