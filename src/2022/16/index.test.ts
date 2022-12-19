@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 const input = `Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
 Valve BB has flow rate=13; tunnels lead to valves CC, AA
@@ -14,5 +14,11 @@ Valve JJ has flow rate=21; tunnel leads to valve II`
 describe('partOne', () => {
     it('returns part one answer', () => {
         expect(partOne(input)).toEqual(1651)
+    })
+})
+
+describe('partTwo', () => {
+    it('returns part two answer', () => {
+        expect(partTwo(input)).toEqual(1707)
     })
 })
