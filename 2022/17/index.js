@@ -74,9 +74,11 @@ function moveRock(chamber, rock, direction) {
     }
     return canMoveDown;
 }
-function solve(input, steps) {
+function solve(input, steps, patternRepeatThreshold = 20) {
     const chamber = [];
     const directions = input.replaceAll(/[^<>]/g, '');
+    const deltas = [];
+    let lastHeight = 0;
     let rockIndex = 0;
     let directionIndex = 0;
     for (let step = 0; step < steps; step++) {
@@ -94,7 +96,26 @@ function solve(input, steps) {
                 break;
             }
         }
+        const delta = chamber.length - lastHeight;
+        deltas.push(delta);
+        lastHeight = chamber.length;
+        const hash = deltas.slice(deltas.length - patternRepeatThreshold).join('|');
+        for (let repeatStep = deltas.length - 1 - (2 * patternRepeatThreshold); repeatStep >= 0; repeatStep--) {
+            const cmp = deltas.slice(repeatStep, repeatStep + patternRepeatThreshold).join('|');
+            if (hash !== cmp) {
+                continue;
+            }
+            const repeatLength = step - patternRepeatThreshold - repeatStep + 1;
+            const repeatDeltas = deltas.slice(repeatStep, repeatStep + repeatLength);
+            const stepsLeft = steps - repeatStep;
+            const mul = Math.floor(stepsLeft / repeatLength);
+            const rem = stepsLeft % repeatLength;
+            return deltas.slice(0, repeatStep).reduce((total, delta) => total + delta, 0)
+                + (mul * repeatDeltas.reduce((total, delta) => total + delta, 0))
+                + repeatDeltas.slice(0, rem).reduce((total, delta) => total + delta, 0);
+        }
     }
     return chamber.length;
 }
 export const partOne = (input) => solve(input, 2022);
+export const partTwo = (input) => solve(input, 1000000000000);
