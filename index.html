@@ -200,7 +200,7 @@
             <label><input type="checkbox" name="viewSource" />view source</label>
         </div>
         <div class="input-container component resizable">
-            <textarea id="input" name="input">Loading ..</textarea>
+            <textarea id="input" name="input" spellcheck="false">Loading ..</textarea>
             <div id="editor" class="editor"></div>
         </div>
     </div>
@@ -290,7 +290,7 @@
 
     const editorReady = new Promise(resolve => {
         let monacoIntervalId = setInterval(function () {
-            while (typeof window.monaco === 'undefined') {
+            if (typeof window.monaco === 'undefined') {
                 return
             }
             clearInterval(monacoIntervalId)
@@ -477,7 +477,6 @@
             }
             script = script.replaceAll(/^export /gm, '')
             script += ';\\nreturn { ' + exports.join(', ') + ' }'
-            console.log(script)
             let promise
             eval('promise = (async function () { ' + script + ' })()')
             const module = { exports: await promise }
