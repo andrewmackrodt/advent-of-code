@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 const input = `1
 2
@@ -11,5 +11,11 @@ const input = `1
 describe('partOne', () => {
     it('returns part one answer', () => {
         expect(partOne(input)).toEqual(3)
+    })
+})
+
+describe('partTwo', () => {
+    it('returns part two answer', () => {
+        expect(partTwo(input)).toEqual(1623178306)
     })
 })
