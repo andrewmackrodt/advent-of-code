@@ -15,16 +15,13 @@ function parseSequence(input, rounds, multi) {
                 continue;
             }
             items.splice(idx, 1);
-            let newIdx = (idx + item.value) % (len - 1);
-            if (newIdx === 0) {
-                newIdx = items.length;
-            }
-            items = items.slice(0, newIdx).concat(item).concat(...items.slice(newIdx));
+            const newIdx = (idx + item.value) % (len - 1);
+            items = [...items.slice(0, newIdx), item, ...items.slice(newIdx)];
         }
     }
     const sequence = items.map(s => s.value);
     const idx = sequence.findIndex(n => n === 0);
-    return [0].concat(sequence.slice(idx + 1)).concat(sequence.slice(0, idx));
+    return [0, ...sequence.slice(idx + 1), ...sequence.slice(0, idx)];
 }
 function solve(input, rounds, multi) {
     const sequence = parseSequence(input, rounds, multi);
