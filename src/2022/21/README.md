@@ -63,3 +63,24 @@ This process continues until <code>root</code> yells a number: <code><b>152</b><
 
 However, your actual situation involves considerably more monkeys. <b>What number will the monkey
 named <code>root</code> yell?</b>
+
+### --- Part Two ---
+
+Due to some kind of monkey-elephant-human mistranslation, you seem to have misunderstood a few key
+details about the riddle.
+
+First, you got the wrong job for the monkey named <code>root</code>; specifically, you got the wrong
+math operation. The correct operation for monkey <code>root</code> should be <code>=</code>, which
+means that it still listens for two numbers (from the same two monkeys as before), but now checks
+that the two numbers <b>match</b>.
+
+Second, you got the wrong monkey for the job starting with <code>humn:</code>. It isn't a monkey -
+it's <b>you</b>. Actually, you got the job wrong, too: you need to figure out <b>what number you
+need to yell</b> so that <code>root</code>'s equality check passes. (The number that appears after
+<code>humn:</code> in your input is now irrelevant.)
+
+In the above example, the number you need to yell to pass <code>root</code>'s equality test is
+<code><b>301</b></code>. (This causes <code>root</code> to get the same number, <code>150</code>,
+from both of its monkeys.)
+
+<b>What number do you yell to pass <code>root</code>'s equality test?</b>

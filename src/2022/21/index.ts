@@ -27,7 +27,7 @@ class Monkey {
 
 const inputRegExp = new RegExp('([a-z]+): (?:(-?[0-9]+)|([a-z]+) ([*/+-]) ([a-z]+))')
 
-function parseInput(input: string): Monkey {
+function parseInput(input: string): Record<string, Monkey> {
     const monkeys: Record<string, Monkey> = {}
     const getOrCreateMonkey = (name: string): Monkey => {
         if (name in monkeys) {
@@ -52,7 +52,40 @@ function parseInput(input: string): Monkey {
                 }
             }
         })
-    return monkeys.root
+    return monkeys
 }
 
-export const partOne = (input: string) => parseInput(input).calculate()
+export const partOne = (input: string) => parseInput(input).root.calculate()
+
+export const partTwo = (input: string) => {
+    const monkeys = parseInput(input)
+    const humn = monkeys.humn
+    const root = monkeys.root
+    const op = root.value as Operation
+    op.op = '-'
+    let delta = 1000
+    let allowDeltaIncrease = true
+    let increase = true
+    let last = 0
+    while (true) {
+        const diff = root.calculate()
+        if (diff === 0) {
+            return humn.value
+        }
+        // if sign has flipped between last diff and current, decrease delta and flip add/subtract
+        if ((last < 0 && 0 < diff) || diff < 0 && 0 < last) {
+            delta = Math.round(delta / 2)
+            increase = ! increase
+            allowDeltaIncrease = false
+        }
+        if (increase) {
+            humn.value = (humn.value as number) + delta
+        } else {
+            humn.value = (humn.value as number) - delta
+        }
+        if (allowDeltaIncrease) {
+            delta *= 2
+        }
+        last = diff
+    }
+}
