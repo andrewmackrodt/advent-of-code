@@ -46,7 +46,7 @@ function parseInput(input: string): Record<string, Monkey> {
                 monkey.value = parseInt(match[2], 10)
             } else {
                 monkey.value = {
-                    op: match[4] as any,
+                    op: match[4] as Operation['op'],
                     a: getOrCreateMonkey(match[3]),
                     b: getOrCreateMonkey(match[5]),
                 }

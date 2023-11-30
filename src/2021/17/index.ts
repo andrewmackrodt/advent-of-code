@@ -33,10 +33,10 @@ function parseInput(input: string): PointArea {
         .split(',')
         .reduce((area, str) => {
             const [k, v1, v2] = str.split(/[=.]+/)
-            area[`${k}1`] = parseInt(v1, 10)
-            area[`${k}2`] = parseInt(v2, 10)
+            area[`${k}1` as keyof PointArea] = parseInt(v1, 10)
+            area[`${k}2` as keyof PointArea] = parseInt(v2, 10)
             return area
-        }, {} as Record<string, number>) as any
+        }, {} as Partial<PointArea>) as PointArea
 }
 
 function getVelocities(input: string): VelocityResult[] {

@@ -1,9 +1,13 @@
 import { existsSync, readFileSync } from 'fs'
 import process from 'process'
 
-const isTs = Boolean(process.env.TS_NODE_DEV || (<any>process)[Symbol.for('ts-node.register.instance')])
+const isTs = Boolean(process.env.TS_NODE_DEV) ||
+    Boolean(process.env.JEST_WORKER_ID) ||
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Boolean((<any>process)[Symbol.for('ts-node.register.instance')] ||
+    Boolean(process.execArgv.join('\0').match(/--loader\0[^\0]*\bts-node\//)))
 const moduleExt = isTs ? 'ts' : 'js'
-const defaultYear = '2022'
+const defaultYear = '2023'
 
 function printResult(part: number, cb: () => unknown) {
     const startedAt = performance.now()
@@ -29,10 +33,10 @@ function printResult(part: number, cb: () => unknown) {
         if (result.match(/^[#. \n]+$/)) {
             result = result.replaceAll(/[. ]/g, '  ').replaceAll(/#/g, '\x1b[38;5;252m\x1b[48;5;255m##\x1b[0m')
         }
-        console.log(`Part ${part} [${elapsedStr}]:`)
+        console.log(`  Part ${part} [${elapsedStr}]:`)
         console.log(result)
     } else {
-        console.log(`Part ${part} [${elapsedStr}]:`, result)
+        console.log(`  Part ${part} [${elapsedStr}]:`, result)
     }
 }
 
@@ -48,8 +52,8 @@ async function main(): Promise<void> {
         year = defaultYear
     }
 
-    if (parseInt(year) < 2015 || 2022 < parseInt(year)) {
-        console.error('Invalid argument year: expected number between 2015 and 2022')
+    if (parseInt(year) < 2015 || 2023 < parseInt(year)) {
+        console.error('Invalid argument year: expected number between 2015 and 2023')
         process.exit(1)
     }
 
@@ -74,6 +78,8 @@ async function main(): Promise<void> {
     if (existsSync(inputPath)) {
         input = readFileSync(inputPath, 'utf-8')
     }
+
+    console.log(`Solution ${year} Day ${day}:`)
 
     if (typeof module.partOne === 'function') {
         printResult(1, () => module.partOne(input))

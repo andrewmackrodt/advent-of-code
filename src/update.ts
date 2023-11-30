@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { get } from 'https'
 import { join } from 'path'
-import dotenv from 'dotenv'
 import process from 'process'
+import dotenv from 'dotenv'
 
 dotenv.config()
 

@@ -1,18 +1,23 @@
 {
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "swc": true
+  },
   "compilerOptions": {
     "baseUrl": "./src",
     "esModuleInterop": true,
+    "lib": [
+      "ES2023",
+      "DOM"
+    ],
     "module": "Node16",
     "moduleResolution": "Node16",
     "strict": true,
-    "target": "ES2021"
+    "target": "ES2022"
   },
-  "exclude": [
-    "./src/**/*.test.ts",
-    "./src/update.ts",
-    "./jest.config.ts"
-  ],
   "include": [
-    "./src/**/*.ts"
+    "./src/**/*",
+    "./*.ts"
   ]
 }

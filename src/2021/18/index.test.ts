@@ -1,4 +1,5 @@
-import { SnailfishUtils, getMagnitudeOfFinalSum, Tree, TreeArray, getLargestMagnitudeOf2 } from './index.js'
+import type { TreeArray } from './index.js'
+import { SnailfishUtils, getMagnitudeOfFinalSum, Tree, getLargestMagnitudeOf2 } from './index.js'
 
 type TestCase<R = TreeArray<number>> = {
     input: TreeArray<number>

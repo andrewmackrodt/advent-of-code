@@ -52,7 +52,7 @@ export class Tree<T> {
             } else {
                 const findFirstRightValue = (node: Tree<T>): TreeValueNode<T> | undefined => {
                     return (isValueNode(node.right) ? node.right : undefined)
-                        ?? findFirstRightValue(node.right as any)
+                        ?? findFirstRightValue(node.right as Tree<T>)
                         // todo can a regular number be on the left?
                         // ?? (isValueNode(node.left) ? node.left : undefined)
                         // ?? findFirstRightValue(node.left as any)
@@ -73,7 +73,7 @@ export class Tree<T> {
             } else {
                 const findFirstLeftValue = (node: Tree<T>): TreeValueNode<T> | undefined => {
                     return (isValueNode(node.left) ? node.left : undefined)
-                        ?? findFirstLeftValue(node.left as any)
+                        ?? findFirstLeftValue(node.left as Tree<T>)
                         // todo can a regular number be on the right?
                         // ?? (isValueNode(node.right) ? node.right : undefined)
                         // ?? findFirstLeftValue(node.right as any)
