@@ -1,11 +1,12 @@
 export class ALU {
+    params = {
+        w: 0,
+        x: 0,
+        y: 0,
+        z: 0,
+    };
+    buffer;
     constructor(serial) {
-        this.params = {
-            w: 0,
-            x: 0,
-            y: 0,
-            z: 0,
-        };
         this.buffer = serial.toString(10).split('').map(s => parseInt(s, 10));
     }
     run(instructions) {

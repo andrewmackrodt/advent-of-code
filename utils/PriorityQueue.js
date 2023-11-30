@@ -2,6 +2,9 @@
  * @see https://stackoverflow.com/a/42919752/650329
  */
 export class PriorityQueue {
+    static TOP = 0;
+    heap;
+    comparator;
     constructor(comparator = (a, b) => a > b) {
         this.heap = [];
         this.comparator = comparator;
@@ -77,4 +80,3 @@ export class PriorityQueue {
         };
     }
 }
-PriorityQueue.TOP = 0;

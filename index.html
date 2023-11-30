@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Advent of Code 2022</title>
+    <title>Advent of Code 2023</title>
     <style rel="stylesheet">
         html {
             background-color: #0f0f23;
@@ -139,13 +139,12 @@
     </style>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/editor/editor.main.min.css"
-          integrity="sha512-GzcoZD7y5zvBofYtImXPZaPVhoY7xLPt+ysmbPb/vU+quSKFkcngxaSrxuwprDZL4MALUqGFmnqCxQZqMozv1Q=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script>var manifest = {2021:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],2022:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21]}</script>
 </head>
 <body>
 <nav>
-    <h1 id="pageTitle">Advent of Code 2022</h1>
+    <h1 id="pageTitle">Advent of Code 2023</h1>
     <div>
         <a id="taskLink" href="#" target="_blank">[Task]</a>
         <a id="srcLink" href="#" target="_blank">[Source]</a>
@@ -161,7 +160,8 @@
         <option value="2019">2019</option>
         <option value="2020">2020</option>
         <option value="2021">2021</option>
-        <option value="2022" selected>2022</option>
+        <option value="2022">2022</option>
+        <option value="2023" selected>2023</option>
     </select>
     <label for="day">Day</label>
     <select class="component" id="day" name="day">
@@ -231,17 +231,13 @@
 </table>
 <!-- load interact.js before monaco-editor to avoid issues -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.17/interact.min.js"
-        integrity="sha512-XcVj3UAxYb1bcxemjAU6ncOu6lhnuRz98icTuL+jrJE+2SCWFMZFc+5FaFsNikLKujDfL71c4LK5OBz1lsAKag=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>window.require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs' } }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.min.js"
-        integrity="sha512-6bIYsGqvLpAiEBXPdRQeFf5cueeBECtAKJjIHer3BhBZNTV3WLcLA8Tm3pDfxUwTMIS+kAZwTUvJ1IrMdX8C5w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/editor/editor.main.nls.min.js"
-        integrity="sha512-CCv+DKWw+yZhxf4Z+ExT6HC5G+3S45TeMTYcJyYbdrv4BpK2vyALJ4FoVR/KGWDIPu7w4tNCOC9MJQIkYPR5FA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/editor/editor.main.min.js"
-        integrity="sha512-u4eMtetNbBJvHXdLXs2kWZvJiVlg3cmkVcxrLzSPa1eNFuHygPYvyMWyK9PsD6Eq2MZSo+mTyjds8uuhPzVxHA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     if (Object.keys(manifest).length === 0) {
@@ -264,6 +260,9 @@
     let year = years.concat().pop()
     let day = manifest[year].concat().pop()
     let objectURL, worker
+
+    const solutions = Object.entries(manifest)
+        .reduce((res, [year, days]) => res.concat(days.map(day => `${year}/${day}`)), [])
 
     const titleElement           = document.getElementById('pageTitle')
     const taskLinkElement        = document.getElementById('taskLink')
@@ -413,10 +412,27 @@
         srcLinkElement.href              = `https://github.com/andrewmackrodt/advent-of-code/blob/main/src/${year}/${getDayStr()}/index.ts`
         yearElement.value                = year
         dayElement.value                 = day
-        prevElement.style.display        = day > days[0] ? 'inline' : 'none'
-        prevElement.href                 = `#!/year/${year}/day/${day - 1}/${search}`
-        nextElement.style.display        = day < days[days.length - 1] ? 'inline' : 'none'
-        nextElement.href                 = `#!/year/${year}/day/${day + 1}/${search}`
+
+        let curSolIdx = solutions.indexOf(`${year}/${day}`)
+
+        if (curSolIdx > 0) {
+            const [py, pd] = solutions[curSolIdx - 1].split('/')
+            prevElement.style.display    = 'inline'
+            prevElement.href             = `#!/year/${py}/day/${pd}/${search}`
+        } else {
+            prevElement.style.display    = 'none'
+            prevElement.href             = ''
+        }
+
+        if (curSolIdx < solutions.length - 1) {
+            const [ny, nd] = solutions[curSolIdx + 1].split('/')
+            nextElement.style.display    = 'inline'
+            nextElement.href             = `#!/year/${ny}/day/${nd}/${search}`
+        } else {
+            nextElement.style.display    = 'none'
+            nextElement.href             = ''
+        }
+
         partOneValueElement.innerText    = '-'
         partOneElapsedElement.innerText  = '-'
         partTwoValueElement.innerText    = '-'
@@ -429,7 +445,7 @@
         }
     }
 
-    const hashRegExp = new RegExp(/\/year\/(20(?:1[5-9]|2[0-2]))\/day\/([1-9]|1[0-9]|2[0-5])\//)
+    const hashRegExp = new RegExp(/\/year\/(20(?:1[5-9]|2[0-3]))\/day\/([1-9]|1[0-9]|2[0-5])\//)
 
     const [_, initialYear, initialDay] = hashRegExp.exec(window.location.hash) ?? []
     setDay({ year: initialYear, day: initialDay })

@@ -1,6 +1,8 @@
 import { PriorityQueue } from '../../utils/PriorityQueue.js';
 const valveRegExp = new RegExp(/\b([A-Z]{2})\b.*?\brate=([0-9]+)\b.*?\b([A-Z]{2}(?:, ?[A-Z]{2})*)$/);
 class MoveEvaluator {
+    cache;
+    valves;
     constructor(valves) {
         this.cache = {};
         this.valves = valves;

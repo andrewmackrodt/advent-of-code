@@ -4,6 +4,9 @@ const isValueNode = (branch) => {
 const isLeft = (node) => node.parent?.left === node;
 const isRight = (node) => node.parent?.right === node;
 export class Tree {
+    parent;
+    left;
+    right;
     static createFromArray(array, parent) {
         if (array.length !== 2) {
             throw new Error('error parsing input');

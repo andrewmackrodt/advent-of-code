@@ -8,20 +8,24 @@ export var PACKET_TYPE;
     PACKET_TYPE[PACKET_TYPE["TYPE_ID_GREATER_THAN"] = 5] = "TYPE_ID_GREATER_THAN";
     PACKET_TYPE[PACKET_TYPE["TYPE_ID_LESS_THAN"] = 6] = "TYPE_ID_LESS_THAN";
     PACKET_TYPE[PACKET_TYPE["TYPE_ID_EQUAL_TO"] = 7] = "TYPE_ID_EQUAL_TO";
-})(PACKET_TYPE = PACKET_TYPE || (PACKET_TYPE = {}));
+})(PACKET_TYPE || (PACKET_TYPE = {}));
 export class Packet {
+    version;
+    typeId;
     constructor(version, typeId) {
         this.version = version;
         this.typeId = typeId;
     }
 }
 export class LiteralPacket extends Packet {
+    value;
     constructor(version, typeId, value) {
         super(version, typeId);
         this.value = value;
     }
 }
 export class OperatorPacket extends Packet {
+    packets;
     constructor(version, typeId, packets = []) {
         super(version, typeId);
         this.packets = packets;

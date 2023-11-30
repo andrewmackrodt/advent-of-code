@@ -1,4 +1,5 @@
 class Monkey {
+    value;
     constructor(value) {
         this.value = value;
     }

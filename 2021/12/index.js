@@ -1,6 +1,6 @@
 class PathBuilder {
+    paths = {};
     constructor(input) {
-        this.paths = {};
         for (const pathNames of input.split('\n').map(s => s.split('-'))) {
             const p1 = this.getOrCreatePath(pathNames[0]);
             const p2 = this.getOrCreatePath(pathNames[1]);
@@ -22,9 +22,10 @@ class PathBuilder {
     }
 }
 class PathFinder {
+    allowOnceSingleSmallCaveRevisit;
+    routes = [];
     constructor(allowOnceSingleSmallCaveRevisit = false) {
         this.allowOnceSingleSmallCaveRevisit = allowOnceSingleSmallCaveRevisit;
-        this.routes = [];
     }
     static getRoutes(input, allowOnceSingleSmallCaveRevisit = false) {
         const start = PathBuilder.getStart(input);
@@ -67,9 +68,10 @@ class PathFinder {
     }
 }
 class Path {
+    name;
+    siblings = [];
     constructor(name) {
         this.name = name;
-        this.siblings = [];
     }
     get isSmall() {
         return this.name[0].toLowerCase() === this.name[0];

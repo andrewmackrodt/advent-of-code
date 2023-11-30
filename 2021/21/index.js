@@ -1,7 +1,9 @@
 class Counter {
+    max;
+    _value;
+    _count = 0;
+    _score = 0;
     constructor(max, value = max) {
-        this._count = 0;
-        this._score = 0;
         this.max = max;
         this._value = value;
     }

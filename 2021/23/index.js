@@ -10,6 +10,12 @@ function repeat(pattern, times) {
     return new Array(times).fill(pattern).join('');
 }
 class Organizer {
+    state;
+    endState;
+    roomSize;
+    cache;
+    energy;
+    steps;
     constructor(state, endState, roomSize, cache, steps = [], energy = 0) {
         this.state = state;
         this.endState = endState;
