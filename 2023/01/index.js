@@ -9,7 +9,7 @@ const numberTextMap = {
     eight: '8',
     nine: '9',
 };
-export function partOne(input, matchWords = false) {
+function solve(input, matchWords = false) {
     const lines = input.trim().replaceAll(/[ \t]+$/gm, '').split('\n');
     const pairs = [];
     const matchValues = Object.values(numberTextMap);
@@ -28,6 +28,7 @@ export function partOne(input, matchWords = false) {
         }
         pairs.push(pair);
     }
-    return pairs.map(([a, b]) => parseInt(a + b)).reduce((sum, n) => sum + n, 0);
+    return pairs.reduce((sum, [a, b]) => sum + parseInt(a + b), 0);
 }
-export const partTwo = (input) => partOne(input, true);
+export const partOne = (input) => solve(input, false);
+export const partTwo = (input) => solve(input, true);
