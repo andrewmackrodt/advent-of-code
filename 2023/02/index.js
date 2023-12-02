@@ -1,38 +1,28 @@
 function parseInput(input) {
-    return input.trim().split('\n').map((line) => {
-        const [a, b] = line.split(':');
-        const idStr = a.trim().match(/(\d+)$/)?.[1];
-        if (!idStr) {
-            return;
-        }
+    const games = [];
+    for (const line of input.trim().split('\n')) {
+        const [idRawStr, setsRawStr] = line.split(':').map(s => s.trim());
+        const idStr = idRawStr.match(/(\d+)$/)?.[1];
+        if (!idStr || !setsRawStr)
+            continue;
         const id = parseInt(idStr);
-        const sets = b?.trim().split(';').map(set => (set.trim().split(',').reduce((cubes, cube) => {
-            const [qtyStr, colour] = cube.trim().split(' ');
-            cubes[colour] = parseInt(qtyStr);
-            return cubes;
-        }, {})));
-        if (!sets) {
-            return;
-        }
-        return { id, sets };
-    })
-        .filter(game => game?.sets.length);
+        const set = {};
+        setsRawStr.split(';').forEach(str => str.trim().split(',').forEach(cubeRawStr => {
+            const [qtyStr, colour] = cubeRawStr.trim().split(' ');
+            const qty = parseInt(qtyStr);
+            if (!(colour in set) || set[colour] < qty)
+                set[colour] = qty;
+        }));
+        games.push({ id, set });
+    }
+    return games;
 }
 export function partOne(input) {
     const max = { red: 12, green: 13, blue: 14 };
     return parseInput(input)
-        .filter(game => !game.sets.find(set => Object.entries(set).find(([colour, qty]) => (colour in max && max[colour] < qty))))
+        .filter(game => !Object.entries(game.set).find(([c, qty]) => c in max && max[c] < qty))
         .reduce((sum, game) => sum + game.id, 0);
 }
 export function partTwo(input) {
-    return parseInput(input)
-        .map(game => game.sets.reduce((res, set) => {
-        for (const [colour, qty] of Object.entries(set)) {
-            if (!(colour in res) || qty > res[colour]) {
-                res[colour] = qty;
-            }
-        }
-        return res;
-    }, {}))
-        .reduce((sum, set) => sum + Object.values(set).reduce((pow, n) => pow * n, 1), 0);
+    return parseInput(input).reduce((sum, { set }) => sum + Object.values(set).reduce((pow, n) => pow * n, 1), 0);
 }
