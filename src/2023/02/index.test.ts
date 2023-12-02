@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 describe('solve', () => {
     const input = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
@@ -9,5 +9,9 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green`
 
     it('returns part one answer', () => {
         expect(partOne(input)).toEqual(8)
+    })
+
+    it('returns part two answer', () => {
+        expect(partTwo(input)).toEqual(2286)
     })
 })

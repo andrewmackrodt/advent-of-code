@@ -27,3 +27,7 @@ export function partOne(input: string): number {
         .filter(game => ! Object.entries(game.set).find(([c, qty]) => c in max && max[c] < qty ))
         .reduce((sum, game) => sum + game.id, 0)
 }
+
+export function partTwo(input: string): number {
+    return parseInput(input).reduce((sum, { set }) => sum + Object.values(set).reduce((pow, n) => pow * n, 1), 0)
+}
