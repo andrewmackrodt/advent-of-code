@@ -1,4 +1,4 @@
-import { partOne } from './index.js'
+import { partOne, partTwo } from './index.js'
 
 describe('solve', () => {
     const input = `Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
@@ -10,5 +10,9 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11`
 
     it('returns part one answer', () => {
         expect(partOne(input)).toEqual(13)
+    })
+
+    it('returns part two answer', () => {
+        expect(partTwo(input)).toEqual(30)
     })
 })
